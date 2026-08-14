@@ -12,7 +12,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{setspace}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc}
@@ -24,6 +25,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{longtable}
 \usepackage[hidelinks,colorlinks=true,linkcolor=apcblue,urlcolor=apcblue,citecolor=apcblue]{hyperref}
 
 % ---------- Palette (reprise des couleurs ESILV / APC Digital) ----------
@@ -38,12 +40,16 @@
 % ---------- Titres de sections ----------
 \titleformat{\section}{\Large\bfseries\color{apcblue}}{\thesection.}{0.5em}{}
 \titleformat{\subsection}{\large\bfseries\color{apcblue}}{}{0em}{}
+\titleformat{\subsubsection}{\bfseries\color{darkgrey}}{}{0em}{}
 \titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1.1em}{0.4em}
 
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[C]{\thepage\ |\ Page}
+
+\onehalfspacing
 
 % ---------- Boite "encart temoignage / focus" ----------
 \newtcolorbox{encart}[1][]{
@@ -140,11 +146,13 @@ Document confidentiel
 
 Cette cinquieme annee cloture cinq annees d'un parcours qui m'a mene de la decouverte de la cybersecurite a une contribution de plus en plus active au sein d'AccessPointCompany, et je souhaite remercier toutes les personnes qui y ont contribue. Je remercie a nouveau l'ESILV Paris de m'avoir permis de mener ce projet de fin de cycle sur un sujet toujours aussi central pour les entreprises, et pour une formation d'ingenieur qui m'a donne les cles de lecture necessaires pour affronter des problematiques de plus en plus concretes.
 
-Je remercie tout particulierement mon tuteur d'alternance, Monsieur Amir Achache, pour la confiance renouvelee qu'il m'a accordee cette annee. Alors que ma premiere annee avait ete consacree a l'apprentissage aux cotes des consultants seniors, cette annee m'a permis de prendre en charge des parties entieres de missions, toujours sous sa supervision sur les points les plus sensibles, et meme d'aider une nouvelle alternante a ses debuts. Cette confiance, qui n'a cesse de grandir, a ete le moteur principal de ma progression.
+Je remercie tout particulierement mon tuteur d'alternance, Monsieur Amir Achache, pour la confiance renouvelee qu'il m'a accordee cette annee. Alors que ma premiere annee avait ete consacree a l'apprentissage aux cotes des consultants seniors, cette annee m'a permis de prendre en charge des parties entieres de missions, toujours sous sa supervision sur les points les plus sensibles, et meme d'aider une nouvelle alternante a ses debuts. Cette confiance, qui n'a cesse de grandir, a ete le moteur principal de ma progression, et je mesure la chance que j'ai eue d'etre accompagne avec autant de patience sur des sujets ou je debutais.
 
-Je souhaite egalement remercier Mohamed, avec qui j'ai continue a collaborer etroitement, mais aussi Nawel, la nouvelle alternante du pole IT-Cybersecurite que j'ai eu la chance d'accompagner sur ses premiers pas, comme mes aines avaient pu le faire pour moi un an plus tot. Transmettre ce que l'on vient d'apprendre est, je crois, une bonne maniere de verifier qu'on l'a vraiment compris. Je remercie aussi l'ensemble des equipes commerciales et techniques d'AccessPointCompany pour leur disponibilite constante, ainsi que nos clients qui m'ont fait confiance sur des missions toujours plus interessantes.
+Je souhaite egalement remercier Mohamed, avec qui j'ai continue a collaborer etroitement sur plusieurs dossiers techniques, et dont l'experience m'a ete precieuse a de nombreuses reprises lorsque je me suis retrouve bloque sur un point technique. Je remercie aussi Nawel, la nouvelle alternante du pole IT-Cybersecurite que j'ai eu la chance d'accompagner sur ses premiers pas, comme mes aines avaient pu le faire pour moi un an plus tot : nos echanges m'ont oblige a reformuler ce que je croyais avoir compris, et c'est souvent en cherchant a lui expliquer une notion simplement que j'ai realise que je la maitrisais moins bien que je ne le pensais.
 
-Enfin, je remercie mon tuteur academique pour son suivi tout au long de ce cycle ingenieur, et pour les echanges qui m'ont aide a construire un projet professionnel aujourd'hui plus precis qu'il ne l'etait il y a un an.
+Je remercie egalement l'ensemble des equipes commerciales et administratives d'AccessPointCompany, en particulier Walid Hamza et Aristide Jeremy, pour leur disponibilite constante et pour m'avoir permis de mieux comprendre le fonctionnement global de l'entreprise au-dela de mon seul perimetre technique. Merci enfin a nos clients, qui m'ont fait confiance sur des missions toujours plus engageantes, et qui ont accepte, avec beaucoup de bienveillance, d'etre accompagnes par un alternant encore en apprentissage sur certains sujets.
+
+Enfin, je remercie mon tuteur academique pour son suivi tout au long de ce cycle ingenieur, et pour les echanges qui m'ont aide a construire un projet professionnel aujourd'hui plus precis qu'il ne l'etait il y a un an. Ce memoire est aussi, en un sens, le fruit de ce dialogue entre le monde academique et le monde professionnel que l'alternance m'aura permis de vivre pendant deux ans.
 
 \newpage
 
@@ -158,47 +166,144 @@ En tant qu'etudiant en 5eme et derniere annee du cycle ingenieur, specialite Cyb
 
 J'ai continue a realiser des audits de vulnerabilite et des plans de continuite d'activite, avec un perimetre de responsabilite elargi par rapport a ma premiere annee, et j'ai eu la chance de contribuer, aux cotes de mon tuteur, a un projet particulier : la demarche de certification ISO 27001 qu'AccessPointCompany a engagee pour elle-meme. Cette mission m'a fait toucher du doigt les enjeux de credibilite d'une entreprise de cybersecurite qui doit d'abord etre exemplaire avant de conseiller ses clients.
 
-J'ai egalement elargi mon perimetre technique : participation, en binome avec un consultant, a des tests d'intrusion, contribution a la mise en place d'un dispositif simple de supervision de securite pour des clients de taille intermediaire, implication dans l'analyse d'un incident de securite chez un client, et construction d'une premiere cartographie des risques fournisseurs pour des clients desormais soumis a des exigences reglementaires renforcees, dans un contexte europeen marque par l'entree en application de textes comme NIS2 et DORA.
+J'ai egalement elargi mon perimetre technique : participation, en binome avec un consultant, a des tests d'intrusion, contribution a la mise en place d'un dispositif simple de supervision de securite, implication dans l'analyse d'un incident de securite chez un client, construction d'une premiere cartographie des risques fournisseurs, et conception d'une campagne de sensibilisation mesuree aupres de plus de deux cents utilisateurs, le tout dans un contexte europeen marque par l'entree en application de textes comme NIS2 et DORA.
 
-Cette annee a egalement ete marquee par un debut de transmission : j'ai pu accompagner l'integration d'une nouvelle alternante au sein du pole IT-Cybersecurite sur ses premieres taches, en partageant avec elle ce que j'avais moi-meme appris un an plus tot. Expliquer une methode a quelqu'un qui la decouvre m'a beaucoup appris sur ma propre comprehension du metier.
+Cette annee a egalement ete marquee par un debut de transmission : j'ai pu accompagner l'integration d'une nouvelle alternante au sein du pole IT-Cybersecurite sur ses premieres taches, en partageant avec elle ce que j'avais moi-meme appris un an plus tot. Expliquer une methode a quelqu'un qui la decouvre m'a beaucoup appris sur ma propre comprehension du metier, et m'a montre a quel point il restait encore des zones grises dans ce que je pensais maitriser.
 
 Enfin, cette experience a confirme et precise mon projet professionnel : je souhaite aujourd'hui evoluer vers un metier a l'intersection de la technique et de la gouvernance, ou l'expertise en securite des systemes d'information se met au service de la strategie et de la resilience des organisations. Je termine ce cycle ingenieur avec la conviction qu'un bon consultant en cybersecurite n'est pas seulement celui qui trouve les failles, mais celui qui sait construire, avec les organisations qu'il accompagne, une culture de la securite durable -- et je mesure qu'il me reste encore beaucoup a apprendre pour y parvenir pleinement.
 
-\bigskip
-\noindent\textbf{Problematique de ce memoire :} comment un alternant, encore junior a l'entree de cette seconde annee, peut-il progressivement gagner en autonomie sur des missions de cybersecurite a responsabilite croissante, tout en continuant a apprendre au contact de son equipe et en commencant lui-meme a transmettre ce qu'il sait ?
-
 \newpage
 
-Ce rapport d'alternance vous presentera cette derniere annee a travers la structure suivante :
+% ============================================================
+% INTRODUCTION
+% ============================================================
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item \textbf{Positionnement de mon alternance et problematique} : j'y etudierai le secteur economique de la cybersecurite et son engagement DD-RSE, le positionnement d'AccessPointCompany au sein de ce secteur, ainsi que mon propre role dans l'entreprise.
-  \item \textbf{Presentation de mon alternance} : je detaillerai les objectifs de mes missions et des projets qui m'ont ete confies, ainsi que mon plan de route sur l'annee.
-  \item \textbf{Deroulement de mon alternance} : je reviendrai sur les differentes missions realisees, la mise en \oe uvre des outils et methodes choisies, et mes realisations individuelles et en equipe.
-  \item \textbf{Bilan de l'annee ecoulee} : je ferai le point sur les competences developpees, les difficultes rencontrees, mes reussites et axes d'amelioration, et je preciserai mon plan de carriere a court et moyen terme.
-\end{enumerate}
+Ce memoire cloture mon cycle ingenieur a l'ESILV et vient prolonger le rapport que j'avais redige a l'issue de ma quatrieme annee. A l'epoque, je decouvrais le metier de consultant en cybersecurite operationnelle : j'accompagnais les consultants seniors sur le terrain, je m'appropriais les referentiels normatifs et je mesurais, pour la premiere fois, la dimension humaine des enjeux de securite des systemes d'information. Cette cinquieme annee ne repart pas de zero : elle s'inscrit dans la continuite directe de cette premiere immersion, avec une difference notable, celle d'un niveau d'exigence et de responsabilite plus eleve, sans pour autant que je considere avoir atteint une pleine autonomie sur l'ensemble des sujets que j'ai pu aborder.
 
-Si ma quatrieme annee m'avait ouvert les yeux sur la dimension humaine de la cybersecurite, cette cinquieme annee m'a appris une chose supplementaire : gagner en autonomie ne signifie pas travailler seul, mais apprendre a demander de l'aide au bon moment, sur le bon sujet, et a la bonne personne.
+Pour construire ce memoire, je me suis appuye sur un journal de bord tenu tout au long de l'annee, sur les comptes rendus de mes missions et sur des echanges reguliers avec mon tuteur d'alternance, qui m'a aide a prendre du recul sur ma propre progression. J'ai egalement sollicite les retours de Nawel et de Mohamed, mes collegues alternants, dont le regard sur mon evolution complete utilement le mien.
+
+La problematique qui traverse ce memoire est la suivante : \emph{comment un alternant, encore junior a l'entree de cette seconde annee, peut-il progressivement gagner en autonomie sur des missions de cybersecurite a responsabilite croissante, tout en continuant a apprendre au contact de son equipe et en commencant lui-meme a transmettre ce qu'il sait ?} Cette question n'est pas seulement personnelle : elle rejoint un enjeu plus large du secteur de la cybersecurite, confronte a une penurie de talents qui oblige les entreprises comme AccessPointCompany a former rapidement, mais serieusement, de jeunes profils.
+
+Pour y repondre, ce memoire est organise en quatre parties. La premiere partie etudie le positionnement de mon alternance : le secteur economique de la cybersecurite dans lequel elle s'est deroulee, l'engagement de ce secteur en matiere de developpement durable et de responsabilite societale, le cadre reglementaire qui le structure, et la maniere dont AccessPointCompany, puis moi-meme, nous positionnons au sein de cet ecosysteme. La deuxieme partie presente mon alternance : les objectifs qui m'ont ete fixes, le plan de route suivi sur l'annee, les methodes et les outils mobilises, et les equipes avec lesquelles j'ai collabore. La troisieme partie retrace le deroulement concret de mon annee, mission par mission, en detaillant la mise en \oe uvre des outils et methodes choisies ainsi que les difficultes techniques rencontrees. Enfin, la quatrieme partie dresse le bilan de cette annee ecoulee : les competences developpees et celles qui me manquent encore, le lien avec ma majeure, les difficultes organisationnelles et humaines rencontrees, mes reussites et mes axes d'amelioration, et le plan de carriere que je me suis fixe pour la suite.
+
+\subsubsection*{Note sur la confidentialite}
+
+Conformement aux engagements de confidentialite d'AccessPointCompany envers ses clients, les missions decrites dans ce memoire sont presentees de maniere anonymisee : les noms des clients ne sont jamais mentionnes, seuls leur secteur d'activite et leur taille approximative sont precises lorsque cela est necessaire a la comprehension du contexte. Les chiffres et resultats presentes, notamment ceux issus de la campagne de sensibilisation ou des audits realises, sont reels mais ont ete verifies avec mon tuteur avant integration a ce document, afin de m'assurer qu'aucune information sensible pour nos clients ou pour AccessPointCompany n'y figure.
+
+\newpage
 
 \section{Positionnement de mon alternance et problematique}
 
 \subsection{Etude du secteur economique de la cybersecurite}
 
-Le secteur de la cybersecurite, dans lequel s'est deroulee mon alternance, est un marche en croissance continue, porte par la multiplication des cybermenaces et par le renforcement constant des exigences reglementaires. Ce secteur reunit des acteurs de natures tres differentes : de grands groupes integres (Thales, Orange Cyberdefense, Capgemini), des editeurs de solutions techniques (SIEM, EDR, pare-feux nouvelle generation), des organismes institutionnels (ANSSI en France, ENISA au niveau europeen, CNIL sur le volet donnees personnelles), et une multitude d'ESN et de cabinets de conseil de taille intermediaire, categorie a laquelle appartient AccessPointCompany.
+Le secteur de la cybersecurite, dans lequel s'est deroulee mon alternance, est un marche en croissance continue depuis plusieurs annees, porte par la multiplication des cybermenaces, par la digitalisation accrue des entreprises et par le renforcement constant des exigences reglementaires. C'est un secteur que j'ai pu observer non seulement depuis mon poste d'alternant chez AccessPointCompany, mais aussi a travers les echanges avec nos clients, nos partenaires et les intervenants professionnels que j'ai pu croiser lors de conferences et de webinaires suivis en parallele de mon activite.
 
-Les produits et services de ce secteur couvrent un spectre large : audit et test d'intrusion, conseil en gouvernance et gestion des risques, integration de solutions de securite, supervision (SOC), formation et sensibilisation, reponse a incident. Les grandes orientations actuelles du marche sont, d'une part, la generalisation de l'intelligence artificielle, a la fois comme outil de defense (detection d'anomalies) et comme nouvel outil entre les mains des attaquants (phishing genere automatiquement, deepfakes), et d'autre part, une penurie persistante de talents qualifies, qui pousse les acteurs du secteur, dont AccessPointCompany, a investir massivement dans la formation de jeunes profils comme les alternants.
+\subsubsection*{Panorama des acteurs}
 
-\subsubsection*{Engagement DD-RSE du secteur}
+Ce secteur reunit des acteurs de natures tres differentes, que j'ai appris a mieux distinguer au fil de mes deux annees d'alternance. On y trouve d'abord de grands groupes integres, comme Thales, Orange Cyberdefense ou Capgemini, capables de deployer des offres completes a l'echelle internationale. On y trouve ensuite des editeurs de solutions techniques, qui developpent et commercialisent les outils utilises par les consultants : solutions de SIEM (Security Information and Event Management), d'EDR (Endpoint Detection and Response), ou encore de pare-feux nouvelle generation. Le secteur s'appuie egalement sur des organismes institutionnels qui fixent le cadre : l'ANSSI en France, l'ENISA au niveau europeen, ou la CNIL sur le volet specifique des donnees personnelles. Enfin, une multitude d'ESN (entreprises de services numeriques) et de cabinets de conseil de taille intermediaire occupent le terrain du conseil operationnel et de l'accompagnement de proximite : c'est dans cette derniere categorie que se situe AccessPointCompany.
 
-L'engagement en matiere de developpement durable et de responsabilite societale (DD-RSE) du secteur de la cybersecurite se decline sur plusieurs volets. Sur le plan social, le secteur souffre d'un manque criant de diversite -- les femmes restent largement minoritaires parmi les experts techniques -- et de nombreuses initiatives (associations, programmes de mentorat, partenariats avec des ecoles) tentent d'y remedier ; le secteur porte egalement une mission d'interet general via la sensibilisation du grand public et des PME les moins bien armees face aux cybermenaces. Sur le plan environnemental, le paradoxe est plus delicat : la securisation des systemes d'information pousse souvent a la multiplication des outils, des serveurs de journalisation et des equipements redondants, ce qui va a l'encontre d'une logique de sobriete numerique ; certains acteurs commencent neanmoins a integrer des criteres d'efficacite energetique dans le choix de leurs infrastructures de supervision. Sur le plan de la gouvernance, enfin, la protection des donnees personnelles (RGPD) et l'ethique de la pratique du test d'intrusion (cadre legal strict, chartes deontologiques) constituent le c\oe ur meme de l'engagement RSE du secteur.
+\subsubsection*{Produits et services du secteur}
 
-AccessPointCompany, a son echelle de PME, traduit cet engagement par des actions concretes : une charte ethique signee par chaque consultant avant toute mission de test d'intrusion, un investissement recurrent dans la formation de jeunes alternants comme moi, et depuis cette annee, sa propre demarche de certification ISO 27001, qui l'engage a appliquer a elle-meme les exigences de gouvernance qu'elle recommande a ses clients.
+Les produits et services de ce secteur couvrent un spectre large, que j'ai eu l'occasion de parcourir en partie durant mon alternance : l'audit et le test d'intrusion, qui visent a identifier des vulnerabilites avant qu'un attaquant ne le fasse ; le conseil en gouvernance et en gestion des risques, qui aide les organisations a structurer leur strategie de securite ; l'integration de solutions techniques, comme les pare-feux ou les outils de chiffrement ; la supervision, qui consiste a surveiller en continu l'activite d'un systeme d'information pour detecter des comportements suspects ; et enfin la formation et la sensibilisation, qui visent a reduire le risque lie a l'erreur humaine.
+
+\subsubsection*{Grandes orientations et tendances}
+
+Plusieurs grandes orientations traversent aujourd'hui ce secteur. La generalisation de l'intelligence artificielle en est une, avec un double visage : elle est a la fois un nouvel outil de defense, capable de detecter des anomalies dans de grands volumes de donnees, et un nouvel outil entre les mains des attaquants, qui l'utilisent pour generer des campagnes de phishing plus credibles ou pour automatiser certaines etapes d'une attaque. La penurie de talents qualifies constitue une seconde tendance de fond, qui pousse les acteurs du secteur, dont AccessPointCompany, a investir massivement dans la formation de jeunes profils comme les alternants, plutot que d'attendre des profils deja experimentes qui se font rares sur le marche. Enfin, la montee en puissance de la cyberassurance et le durcissement continu du cadre reglementaire poussent de plus en plus d'entreprises, meme les plus petites, a s'interesser serieusement a leur niveau de securite, alors qu'elles n'y accordaient auparavant que peu d'attention.
+
+\subsubsection*{Quelques ordres de grandeur}
+
+Pour situer ces tendances, il m'a semble utile de rassembler quelques ordres de grandeur souvent cites dans la presse professionnelle et lors des webinaires que j'ai pu suivre cette annee. Ces chiffres n'ont pas de valeur scientifique precise dans le cadre de ce memoire, mais ils donnent une idee du contexte dans lequel evolue AccessPointCompany.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{9.0cm}p{4.4cm}@{}}
+\toprule
+\textbf{Indicateur} & \textbf{Ordre de grandeur} \\
+\midrule
+Entreprises francaises ayant subi au moins une tentative de cyberattaque en 2021 (donnee deja citee dans mon rapport de 4e annee) & Pres de 8 sur 10 \\
+Part des incidents de securite lies, au moins partiellement, a une erreur humaine, d'apres mon experience de terrain chez AccessPointCompany & Grande majorite des cas traites \\
+Reduction du taux de clic sur emails simules apres une session de sensibilisation ciblee, mesuree sur ma campagne de la mission 7 & De 34\,\% a 9\,\% \\
+Postes vacants dans la cybersecurite en France, d'apres les echanges avec le pole commercial d'AccessPointCompany & Plusieurs milliers, selon les estimations du secteur \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Au-dela de leur caractere illustratif, ces chiffres resument assez bien ce que j'ai pu observer sur le terrain cette annee : une menace qui touche presque toutes les organisations, une cause humaine preponderante, une sensibilisation qui fonctionne lorsqu'elle est bien menee, et un marche de l'emploi qui reste tres favorable aux jeunes profils comme le mien.
+
+\subsection{Engagement DD-RSE du secteur de la cybersecurite}
+
+L'engagement en matiere de developpement durable et de responsabilite societale (DD-RSE) du secteur de la cybersecurite se decline sur plusieurs volets, que j'ai pu observer a des degres divers au cours de mon alternance.
+
+\subsubsection*{Volet social}
+
+Sur le plan social, le secteur souffre d'un manque criant de diversite : les femmes restent largement minoritaires parmi les experts techniques, une realite que j'ai pu constater directement au sein meme de mon equipe avant l'arrivee de Nawel. De nombreuses initiatives, portees par des associations professionnelles, des programmes de mentorat et des partenariats avec des ecoles, tentent d'y remedier, meme si les resultats restent encore limites a l'echelle du secteur. Le secteur porte egalement une mission d'interet general via la sensibilisation du grand public et des PME les moins bien armees face aux cybermenaces, une mission a laquelle j'ai modestement contribue cette annee a travers plusieurs actions de sensibilisation aupres de nos clients.
+
+\subsubsection*{Volet environnemental}
+
+Sur le plan environnemental, le paradoxe est plus delicat a resoudre. La securisation des systemes d'information pousse souvent a la multiplication des outils, des serveurs de journalisation et des equipements redondants, ce qui va a l'encontre d'une logique de sobriete numerique. J'ai pu observer ce paradoxe directement lors de la mise en place d'un dispositif de supervision de securite pour un client : chaque nouvelle source de journalisation ajoutee ameliore la visibilite sur les menaces, mais augmente egalement la consommation de stockage et de calcul necessaire pour les traiter. Certains acteurs du secteur commencent neanmoins a integrer des criteres d'efficacite energetique dans le choix de leurs infrastructures, une reflexion encore balbutiante chez AccessPointCompany mais que j'ai pu voir emerger dans les discussions internes.
+
+\subsubsection*{Volet gouvernance}
+
+Sur le plan de la gouvernance, enfin, la protection des donnees personnelles, encadree par le RGPD, et l'ethique de la pratique du test d'intrusion, encadree par un cadre legal strict et par des chartes deontologiques, constituent le c\oe ur meme de l'engagement RSE du secteur. C'est un volet que j'ai particulierement mesure cette annee en participant, en binome, a des tests d'intrusion : chaque action devait etre explicitement autorisee par le client, documentee, et menee dans le strict respect du perimetre defini a l'avance.
+
+\subsubsection*{L'engagement d'AccessPointCompany}
+
+AccessPointCompany, a son echelle de PME, traduit cet engagement par des actions concretes : une charte ethique signee par chaque consultant avant toute mission de test d'intrusion, un investissement recurrent dans la formation de jeunes alternants comme moi et comme Nawel, et depuis cette annee, sa propre demarche de certification ISO 27001, qui l'engage a appliquer a elle-meme les exigences de gouvernance qu'elle recommande a ses clients. Cette coherence entre le discours tenu aux clients et les pratiques internes de l'entreprise m'a semble etre un element important de sa credibilite sur le marche.
+
+\subsection{Cadre reglementaire et normatif}
+
+Le cadre reglementaire dans lequel evolue AccessPointCompany, et donc dans lequel s'est deroulee mon alternance, s'est encore renforce cette annee. Trois textes ont particulierement structure mes missions.
+
+\subsubsection*{La directive NIS2}
+
+La directive europeenne NIS2 (Network and Information Security 2) etend considerablement le perimetre d'entreprises soumises a des obligations de cybersecurite, en integrant de nombreux secteurs jusque-la peu concernes par une reglementation specifique. Pour AccessPointCompany, cela s'est traduit par un afflux de demandes de clients jusque-la peu sensibilises, desormais contraints par la loi de structurer leur securite, et qui sont venus nous solliciter pour des audits de mise en conformite.
+
+\subsubsection*{Le reglement DORA}
+
+Le reglement DORA (Digital Operational Resilience Act) impose au secteur financier des exigences renforcees en matiere de resilience operationnelle numerique, avec des objectifs precis de temps de reprise (RTO) et de perte de donnees maximale tolerable (RPO). J'ai directement mesure l'impact de ce texte cette annee en travaillant sur des dossiers de continuite d'activite pour des clients du secteur bancaire, ou le niveau d'exigence etait sensiblement plus eleve que sur mes dossiers de premiere annee.
+
+\subsubsection*{Le RGPD}
+
+Le RGPD, deja bien connu depuis plusieurs annees, reste neanmoins une reference constante dans l'ensemble de nos missions : chaque cartographie des systemes d'information que je realise integre desormais systematiquement une reflexion sur les traitements de donnees personnelles concernes, meme lorsque ce n'est pas l'objet principal de la mission.
+
+Cette accumulation d'obligations reglementaires n'est pas sans consequence sur le quotidien d'un consultant junior comme moi : il faut savoir naviguer entre plusieurs referentiels, parfois avec des exigences qui se recoupent partiellement, et savoir orienter le client vers le bon niveau de priorite sans le noyer sous une complexite reglementaire qu'il ne maitrise pas toujours.
 
 \subsection{Positionnement d'AccessPointCompany au sein de son secteur d'activite}
 
-Un an apres ma premiere presentation de l'entreprise, AccessPointCompany (APC Digital) a poursuivi sa transformation. Toujours basee a Cachan en Ile-de-France, avec son antenne a Alger, l'entreprise a renforce ses effectifs au sein du pole IT-Cybersecurite et a engage sa propre demarche de certification ISO 27001, un signal fort envoye a ses clients comme a ses partenaires. Sur son marche, AccessPointCompany se differencie par une approche de proximite, moins standardisee que celle des grands cabinets : chaque mission est adaptee au contexte specifique du client, avec une preference marquee pour des livrables operationnels plutot que pour des rapports theoriques.
+Un an apres ma premiere presentation de l'entreprise, AccessPointCompany (APC Digital) a poursuivi sa transformation. Toujours basee a Cachan en Ile-de-France, avec son antenne a Alger, l'entreprise a renforce ses effectifs au sein du pole IT-Cybersecurite et a engage sa propre demarche de certification ISO 27001, un signal fort envoye a ses clients comme a ses partenaires. Sur son marche, AccessPointCompany se differencie par une approche de proximite, moins standardisee que celle des grands cabinets : chaque mission est adaptee au contexte specifique du client, avec une preference marquee pour des livrables operationnels plutot que pour des rapports theoriques de plusieurs centaines de pages.
 
 Le catalogue de services s'est etoffe autour de quatre grands axes desormais bien identifies : le diagnostic (audits et tests d'intrusion), la resilience (plans de continuite et de reprise d'activite), la conformite (accompagnement reglementaire) et, nouveaute de cette annee, une premiere brique de supervision (monitoring de securite simplifie pour les clients ne disposant pas de SOC en interne). Sur ses segments de marche, l'entreprise cible principalement les PME et ETI, avec une clientele qui s'est elargie cette annee vers des comptes du secteur bancaire et assurantiel, plus exigeants du fait de DORA, ainsi que vers des operateurs de telecommunications en Algerie.
+
+Pour mieux situer AccessPointCompany face a la concurrence, j'ai construit, avec l'aide de mon tuteur, une analyse synthetique de ses forces et faiblesses :
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{7.2cm}p{7.2cm}@{}}
+\toprule
+\textbf{Forces} & \textbf{Faiblesses} \\
+\midrule
+Approche de proximite, forte personnalisation des livrables. &
+Taille reduite face aux grands cabinets sur les appels d'offres les plus importants. \\
+Presence internationale (France, Algerie, clients au Moyen-Orient). &
+Offre de supervision encore jeune et peu automatisee. \\
+Culture de la formation des jeunes alternants. &
+Dependance a quelques consultants seniors sur les dossiers les plus complexes. \\
+\midrule
+\textbf{Opportunites} & \textbf{Menaces} \\
+\midrule
+Durcissement reglementaire (NIS2, DORA) generant de nouveaux besoins clients. &
+Concurrence croissante des grands groupes sur le segment PME/ETI. \\
+Credibilite renforcee par la certification ISO 27001 interne en cours. &
+Penurie de talents qualifies, difficulte a recruter aussi vite que la demande. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Perspectives d'evolution pour AccessPointCompany}
+
+En echangeant avec mon tuteur sur les perspectives de l'entreprise, plusieurs pistes d'evolution se dessinent pour les prochaines annees. La premiere est la consolidation de l'offre de supervision de securite, encore jeune, qui pourrait devenir un relais de croissance important si l'entreprise parvient a l'automatiser davantage sans perdre l'approche de proximite qui la caracterise. La seconde est la poursuite du developpement a l'international, notamment autour du dossier avec l'operateur Algerie Telecom auquel j'ai pu ponctuellement contribuer, qui pourrait ouvrir la voie a d'autres clients de ce type dans la region. La troisieme, enfin, est la valorisation commerciale de la certification ISO 27001 interne, une fois obtenue, comme argument de differenciation face a des concurrents de taille plus importante mais moins agiles sur ce type de demarche.
 
 \subsection{Role de mon alternance et mon positionnement au sein de l'entreprise}
 
@@ -237,52 +342,142 @@ J'ai realise ma seconde annee d'alternance au sein du departement IT-Cybersecuri
 }
 \end{center}
 
-Concretement, mon role est reste celui d'un alternant, mais avec un niveau d'exigence et de responsabilite plus eleve qu'en premiere annee : cadrage d'une partie des missions avec le client sous supervision, realisation technique en autonomie ou en binome selon la complexite du sujet, redaction de livrables desormais relus mais moins systematiquement corriges par mon tuteur. J'ai egalement pu, pour la premiere fois, partager mon experience avec Nawel, la nouvelle alternante arrivee cette annee, sur des sujets simples ou je me sentais legitime.
+Concretement, mon role est reste celui d'un alternant, mais avec un niveau d'exigence et de responsabilite plus eleve qu'en premiere annee : cadrage d'une partie des missions avec le client sous supervision, realisation technique en autonomie ou en binome selon la complexite du sujet, redaction de livrables desormais relus mais moins systematiquement corriges par mon tuteur. Une semaine type se compose generalement de deux a trois demi-journees consacrees a un audit ou a un dossier en cours, d'un temps dedie au projet de certification ISO 27001 interne, d'un point hebdomadaire avec mon tuteur, et de moments plus informels d'echange avec Nawel ou Mohamed sur des questions techniques. J'ai egalement pu, pour la premiere fois, partager mon experience avec Nawel, la nouvelle alternante arrivee cette annee, sur des sujets simples ou je me sentais legitime.
 
 \begin{encart}[title={Temoignage -- Nawel, alternante IT-Cybersecurite}]
 \textit{"Samy a ete l'une des premieres personnes a qui j'ai pose mes questions les plus basiques sans avoir peur d'avoir l'air idiote. Il m'a explique la methode EBIOS avec ses propres mots, pas avec ceux du referentiel, et ca m'a beaucoup aidee a demarrer."}
 \end{encart}
 
-\section{Presentation de mon alternance}
+\subsection{Comparaison avec ma premiere annee d'alternance}
 
-\subsection{Objectifs de mes missions en apprentissage et projets confies}
-
-En debut d'annee, mon tuteur et moi avons defini ensemble trois objectifs principaux pour cette seconde annee d'alternance. Le premier etait de gagner en autonomie sur les missions deja maitrisees l'annee precedente -- audits de vulnerabilite, plans de continuite d'activite -- en reduisant progressivement le niveau de supervision directe sur le terrain. Le deuxieme etait d'elargir mon perimetre technique vers des sujets nouveaux pour moi : participation active a des tests d'intrusion, premiere approche de la supervision de securite, decouverte de l'analyse post-incident. Le troisieme, plus personnel, etait de commencer a explorer la dimension gouvernance, risques et conformite (GRC) du metier, en participant a la demarche de certification ISO 27001 qu'AccessPointCompany a engagee pour elle-meme.
-
-Les principaux projets qui m'ont ete confies cette annee ont ete : la conduite, en responsabilite plus large qu'en premiere annee, d'audits de vulnerabilite pour plusieurs clients PME ; la contribution a la constitution du dossier de certification ISO 27001 interne, sous la responsabilite de mon tuteur ; la participation, en binome avec un consultant confirme, a des tests d'intrusion sur des applications web ; l'implication dans l'analyse d'un incident de securite chez un client ; et enfin l'accompagnement des premiers pas de Nawel au sein du pole.
-
-\subsection{Plan de route}
-
-Pour organiser mon annee, j'ai construit avec mon tuteur un retroplanning simplifie, revu regulierement au fil des priorites commerciales de l'entreprise.
+Pour mieux mesurer mon evolution, il m'a semble utile de comparer directement mon positionnement de premiere annee avec celui de cette seconde annee, sur quelques dimensions cles de mon activite.
 
 \begin{center}
 \small
-\begin{tabular}{@{}p{3.2cm}p{10.5cm}@{}}
+\begin{tabular}{@{}p{4.2cm}p{4.9cm}p{4.9cm}@{}}
 \toprule
-\textbf{Periode} & \textbf{Jalon} \\
+\textbf{Dimension} & \textbf{4e annee (premiere annee)} & \textbf{5e annee (seconde annee)} \\
 \midrule
-Septembre -- Octobre & Reprise des missions courantes (audits, PCA) avec un niveau d'autonomie accru ; integration et accompagnement de Nawel dans ses premieres semaines. \\
-Novembre -- Decembre & Lancement de la contribution au projet de certification ISO 27001 interne : inventaire des actifs et premiere analyse de risques EBIOS. \\
-Janvier -- Fevrier & Participation a des tests d'intrusion en binome ; redaction de la premiere version de la declaration d'applicabilite (SoA) du projet ISO 27001. \\
-Mars -- Avril & Implication dans l'analyse d'un incident de securite chez un client ; contribution a la mise en place d'un dispositif simple de supervision. \\
-Mai -- Juin & Restitutions clients, finalisation des livrables du projet ISO 27001 interne, bilan de l'annee et redaction du present memoire. \\
+Cadrage client & Observation aux cotes d'un consultant senior & Cadrage seul sur les dossiers simples, accompagne sur les autres \\
+Realisation technique & Execution encadree, pas a pas & Autonomie sur les taches maitrisees, binome sur les taches nouvelles \\
+Redaction de livrables & Systematiquement corrigee avant envoi & Relue mais moins souvent corrigee en profondeur \\
+Relation aux pairs & Accompagne par des alternants plus experimentes & Debut d'accompagnement d'une alternante plus junior \\
+Perimetre thematique & Audits, PCA & Audits, PCA, pentest, supervision, GRC, risques fournisseurs \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-L'analyse de besoins pour chaque mission a suivi la meme logique qu'en premiere annee : un rendez-vous de cadrage avec le client, souvent accompagne de mon tuteur ou d'un consultant senior sur les dossiers les plus complexes, pour comprendre le contexte metier avant de se pencher sur les aspects techniques. Sur le plan des methodes et outils, j'ai continue a m'appuyer sur les referentiels ISO 27001, ISO 22301 et la methode EBIOS, ainsi que sur des outils techniques comme Nessus pour les scans de vulnerabilite, nmap et Burp Suite lors des tests d'intrusion, et des tableaux de bord simples (Excel, puis un outil de visualisation plus avance decouvert cette annee) pour restituer les resultats aux clients. Les equipes concernees par mes missions ont ete, en interne, le pole IT-Cybersecurite et ponctuellement le pole commercial pour les rendez-vous avant-vente, et cote client, aussi bien les equipes IT que les directions metier ou, sur le projet ISO 27001 interne, la direction generale d'AccessPointCompany elle-meme.
+Cette comparaison met en evidence une progression reelle, mais qui reste, sur plusieurs dimensions, une progression de degre plutot que de nature : je n'ai pas change de statut, je continue d'etre un alternant epaule par son equipe, mais le niveau de complexite des sujets que l'on me confie desormais, et la part d'autonomie qui m'est accordee sur les sujets deja maitrises, ont sensiblement augmente.
 
+\newpage
+\section{Presentation de mon alternance}
+
+\subsection{Objectifs de mes missions en apprentissage et projets confies}
+
+En debut d'annee, mon tuteur et moi avons defini ensemble trois grands types d'objectifs pour cette seconde annee d'alternance.
+
+Les objectifs techniques, d'abord : gagner en autonomie sur les missions deja maitrisees l'annee precedente -- audits de vulnerabilite, plans de continuite d'activite -- en reduisant progressivement le niveau de supervision directe sur le terrain, tout en elargissant mon perimetre vers des sujets nouveaux pour moi, comme la participation active a des tests d'intrusion, une premiere approche de la supervision de securite, et une decouverte de l'analyse post-incident.
+
+Les objectifs transverses et humains, ensuite : ameliorer ma capacite a communiquer des resultats techniques a des interlocuteurs non techniques, apprendre a gerer plusieurs dossiers en parallele sans perdre en qualite, et commencer a transmettre mes acquis a une collegue plus junior que moi.
+
+Les objectifs personnels, enfin : commencer a explorer la dimension gouvernance, risques et conformite (GRC) du metier, un axe qui m'interessait de plus en plus depuis ma premiere annee, en participant a la demarche de certification ISO 27001 qu'AccessPointCompany a engagee pour elle-meme.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{5.0cm}p{9.0cm}@{}}
+\toprule
+\textbf{Objectif} & \textbf{Projet confie associe} \\
+\midrule
+Gagner en autonomie sur les missions maitrisees &
+Audits de vulnerabilite en responsabilite elargie pour plusieurs clients PME \\
+Elargir le perimetre technique &
+Tests d'intrusion en binome, premiere approche de la supervision de securite \\
+Explorer la dimension GRC &
+Contribution au projet de certification ISO 27001 interne \\
+Ameliorer la communication et la transmission &
+Restitutions clients, accompagnement de Nawel \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Plan de route}
+
+Pour organiser mon annee, j'ai construit avec mon tuteur un retroplanning, revu regulierement au fil des priorites commerciales de l'entreprise et des alea propres a chaque mission.
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{2.6cm}p{10.8cm}@{}}
+\toprule
+\textbf{Periode} & \textbf{Jalon} \\
+\midrule
+\endhead
+Septembre & Reprise de contact avec l'equipe, point de cadrage avec mon tuteur sur les objectifs de l'annee, reprise des missions courantes (audits, PCA). \\
+Octobre & Integration et accompagnement des premieres semaines de Nawel au sein du pole ; poursuite des audits en cours. \\
+Novembre & Lancement de la contribution au projet de certification ISO 27001 interne : premier inventaire des actifs. \\
+Decembre & Poursuite de l'analyse de risques EBIOS sur le projet ISO 27001 interne ; premiere participation a un test d'intrusion en binome. \\
+Janvier & Redaction d'une premiere version de la declaration d'applicabilite (SoA) du projet ISO 27001 interne. \\
+Fevrier & Conception de la campagne de simulation de phishing pour un client ; deuxieme participation a un test d'intrusion. \\
+Mars & Implication dans l'analyse d'un incident de securite chez un client. \\
+Avril & Contribution a la mise en place d'un dispositif simple de supervision de securite ; construction de la cartographie des risques fournisseurs. \\
+Mai & Restitutions clients sur les principales missions de l'annee ; finalisation des livrables du projet ISO 27001 interne. \\
+Juin & Bilan de l'annee avec mon tuteur, redaction du present memoire. \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Analyse des besoins}
+
+L'analyse de besoins pour chaque mission a suivi la meme logique qu'en premiere annee, avec un niveau de responsabilite different. Chaque mission commence par un rendez-vous de cadrage avec le client, souvent accompagne de mon tuteur ou d'un consultant senior sur les dossiers les plus complexes, mais que j'ai pu mener seul sur certains dossiers plus simples. L'objectif de ce rendez-vous est de comprendre le contexte metier avant de se pencher sur les aspects techniques : quelle est l'activite du client, quelles sont ses contraintes de disponibilite, quels sont ses enjeux reglementaires specifiques, et qui sont les interlocuteurs a impliquer.
+
+Sur le projet de certification ISO 27001 interne, cette etape a pris une forme particuliere : il ne s'agissait plus d'interroger un client externe, mais de recueillir les besoins et les contraintes de mes propres collegues, ce qui m'a demande une posture differente, plus proche de l'ecoute interne que du questionnement client classique.
+
+\subsection{Methodes et outils utilises}
+
+Sur le plan des referentiels normatifs, j'ai continue a m'appuyer sur les normes ISO 27001 (management de la securite de l'information) et ISO 22301 (continuite d'activite), ainsi que sur la methode EBIOS Risk Manager pour la gestion des risques. J'ai egalement du me familiariser plus serieusement avec le contenu des textes NIS2 et DORA, dont je ne connaissais l'annee precedente que les grandes lignes.
+
+Sur le plan des outils techniques, j'ai utilise Nessus pour les scans de vulnerabilite automatises, nmap pour la reconnaissance reseau, Burp Suite lors des tests d'intrusion sur des applications web, et John the Ripper pour des exercices de sensibilisation a la robustesse des mots de passe. Pour la restitution des resultats, j'ai continue a utiliser des tableaux de bord simples sous Excel, et j'ai decouvert cette annee un outil de visualisation plus avance pour presenter certains indicateurs a nos clients.
+
+Sur le plan de la gestion de projet et de la communication, j'ai utilise un tableau de suivi partage pour organiser mes differents dossiers en parallele, et j'ai participe a des points reguliers, en presentiel comme a distance, avec les equipes clientes et avec mon tuteur.
+
+\subsection{Equipes concernees}
+
+Mes missions m'ont amene a collaborer avec des equipes variees. En interne, j'ai travaille principalement avec le pole IT-Cybersecurite, mais aussi ponctuellement avec le pole commercial lors de rendez-vous avant-vente ou ma presence permettait d'apporter un premier eclairage technique. Cote client, j'ai ete en contact aussi bien avec des equipes IT operationnelles, plus a l'aise avec le vocabulaire technique, qu'avec des directions metier ou des directions generales, avec lesquelles j'ai du adapter mon discours. Sur le projet ISO 27001 interne, la liste des parties prenantes incluait, fait nouveau pour moi, la direction generale d'AccessPointCompany elle-meme.
+
+\subsection{Exemple d'une semaine type}
+
+Pour rendre plus concret le fonctionnement de mon annee, voici un exemple de semaine type, tel que je le notais dans mon journal de bord vers le mois de fevrier, au moment ou plusieurs de mes missions se recoupaient.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{2.0cm}p{11.4cm}@{}}
+\toprule
+\textbf{Jour} & \textbf{Activites principales} \\
+\midrule
+Lundi & Point hebdomadaire avec mon tuteur ; poursuite de l'audit de vulnerabilite en cours chez un client PME. \\
+Mardi & Journee consacree au projet ISO 27001 interne : relecture des retours de mon tuteur sur la SoA, corrections. \\
+Mercredi & Test d'intrusion en binome avec un consultant sur une application web cliente (matinee) ; redaction du compte rendu (apres-midi). \\
+Jeudi & Echange avec Nawel sur la methode EBIOS ; preparation de la campagne de simulation de phishing avec un consultant. \\
+Vendredi & Veille technologique ; mise a jour de mes dossiers en cours dans le tableau de suivi partage ; temps de recul et de prise de notes pour ce memoire. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Cette semaine illustre bien la nature de mon activite cette annee : plusieurs dossiers menes en parallele, une alternance entre travail autonome et travail en binome selon la nature du sujet, et des moments reguliers d'echange, que ce soit avec mon tuteur ou avec Nawel.
+
+\newpage
 \section{Deroulement de mon alternance}
 
 \subsection{Presentation des differentes missions}
 
 \subsubsection*{Mission 1 -- Audits de vulnerabilite en autonomie accrue}
 
-J'ai poursuivi la realisation d'audits de vulnerabilite pour des clients PME, en suivant les normes ISO 27001 et ISO 22301 comme cadre methodologique. Par rapport a ma premiere annee, j'ai gagne en autonomie sur l'interpretation des resultats et sur la premiere priorisation des remediations, meme si la validation finale des recommandations les plus sensibles est restee du ressort de mon tuteur.
+J'ai poursuivi la realisation d'audits de vulnerabilite pour des clients PME, en suivant les normes ISO 27001 et ISO 22301 comme cadre methodologique. Par rapport a ma premiere annee, j'ai gagne en autonomie sur l'interpretation des resultats et sur la premiere priorisation des remediations, meme si la validation finale des recommandations les plus sensibles est restee du ressort de mon tuteur. Sur l'un de ces audits, chez un client du secteur de la logistique, j'ai identifie un serveur de test expose sur le reseau interne sans authentification renforcee, un cas assez proche de ce que j'avais deja pu observer lors de ma premiere annee, mais que j'ai cette fois-ci pu documenter et presenter au client de maniere entierement autonome, avant relecture de mon tuteur.
 
 \subsubsection*{Mission 2 -- Contribution au projet de certification ISO 27001 interne}
 
-La mission la plus formatrice de mon annee a ete ma contribution, sous la responsabilite directe de mon tuteur, au projet de certification ISO 27001 d'AccessPointCompany elle-meme. J'ai participe a l'inventaire des actifs et a l'analyse de risques selon la methode EBIOS, ainsi qu'a la redaction d'une premiere version de la declaration d'applicabilite (Statement of Applicability), ensuite revue et corrigee par mon tuteur avant validation. Ce projet m'a fait decouvrir un exercice singulier : contribuer a l'audit de sa propre organisation impose une rigueur differente de celle requise pour un client, car les ecarts constates concernent aussi son propre quotidien de travail.
+La mission la plus formatrice de mon annee a ete ma contribution, sous la responsabilite directe de mon tuteur, au projet de certification ISO 27001 d'AccessPointCompany elle-meme. J'ai participe a l'inventaire des actifs de l'entreprise -- postes de travail des consultants, acces aux outils clients, documentation des audits realises -- puis a l'analyse de risques selon la methode EBIOS, en construisant des scenarios comme \emph{"un consultant quitte l'entreprise avec les identifiants d'acces clients"} ou \emph{"un poste de travail compromis expose les rapports d'audit confidentiels de nos clients"}. J'ai ensuite redige une premiere version de plusieurs sections de la declaration d'applicabilite (Statement of Applicability), un document qui recense, pour chacune des mesures de l'Annexe A de la norme, si elle est retenue et pourquoi. Cette premiere version a ete revue et largement corrigee par mon tuteur avant validation, ce qui m'a permis de mesurer l'ecart entre ma comprehension theorique de la norme et son application rigoureuse.
+
+Parmi les mesures de l'Annexe A que j'ai eu a documenter, trois m'ont particulierement marque. La mesure relative au controle des acces m'a demande de retracer, avec l'aide de mon tuteur, qui avait acces a quoi au sein de l'entreprise, un exercice plus complexe que prevu tant les acces s'etaient accumules au fil des annees sans revue systematique. La mesure relative a la gestion des incidents de securite m'a permis de reutiliser, dans un contexte interne cette fois, les reflexes acquis lors de la mission 4 decrite plus loin. Enfin, la mesure relative a la sensibilisation du personnel a ete l'occasion d'un echange interessant avec mon tuteur sur la difficulte, pour une entreprise de cybersecurite, de former ses propres consultants sans tomber dans un discours trop evident pour des experts du sujet.
 
 \begin{encart}[title=Ce que ce projet m'a appris]
 Etre implique dans l'audit de sa propre entreprise est un exercice plus inconfortable qu'on ne l'imagine, meme lorsqu'on n'en est pas le pilote. J'ai appris a documenter des ecarts qui me concernaient directement, et a accepter les remarques de mon tuteur sur des livrables que je pensais aboutis.
@@ -290,23 +485,43 @@ Etre implique dans l'audit de sa propre entreprise est un exercice plus inconfor
 
 \subsubsection*{Mission 3 -- Tests d'intrusion en binome}
 
-J'ai participe, toujours en binome avec un consultant plus experimente, a plusieurs tests d'intrusion sur des applications web exposees. Mon role a evolue par rapport a ma premiere annee, ou j'etais essentiellement observateur : cette annee, j'ai pu operer moi-meme certaines etapes de la reconnaissance et des tests, sous la supervision directe du consultant qui validait chaque action avant qu'elle ne soit menee.
+J'ai participe, toujours en binome avec un consultant plus experimente, a plusieurs tests d'intrusion sur des applications web exposees. Mon role a evolue par rapport a ma premiere annee, ou j'etais essentiellement observateur : cette annee, j'ai pu operer moi-meme certaines etapes de la reconnaissance et des tests, sous la supervision directe du consultant qui validait chaque action avant qu'elle ne soit menee. Sur l'un de ces tests, j'ai pu identifier, avec l'aide du consultant, une faille de type injection permettant de contourner l'authentification d'un formulaire, une decouverte qui m'a beaucoup marque tant elle etait simple a exploiter une fois identifiee.
 
 \subsubsection*{Mission 4 -- Analyse d'un incident de securite}
 
-J'ai ete implique dans l'analyse d'un incident de securite chez un client, une attaque par rancongiciel ayant partiellement abouti. Sous la conduite d'un consultant senior, j'ai participe a la reconstruction d'une chronologie simplifiee de l'attaque et a l'identification du vecteur d'entree probable -- un acces distant mal segmente. Cette mission m'a permis de decouvrir une dimension du metier que je ne connaissais pas encore : la gestion, dans l'urgence, d'un client en situation de crise.
+J'ai ete implique dans l'analyse d'un incident de securite chez un client, une attaque par rancongiciel ayant partiellement abouti. Sous la conduite d'un consultant senior, j'ai participe a la reconstruction d'une chronologie simplifiee de l'attaque et a l'identification du vecteur d'entree probable -- un acces distant mal segmente. Cette mission m'a permis de decouvrir une dimension du metier que je ne connaissais pas encore : la gestion, dans l'urgence, d'un client en situation de crise, avec des interlocuteurs stresses et des decisions a prendre rapidement, souvent avec des informations incompletes.
 
 \subsubsection*{Mission 5 -- Premiere approche de la supervision de securite}
 
-J'ai contribue a la mise en place d'un dispositif simple de supervision de securite pour un client de taille intermediaire : centralisation des journaux et definition, avec le consultant en charge du projet, de quelques regles d'alerte de base sur les comportements suspects. Il s'agissait la d'une premiere decouverte de ce sujet pour moi, avec une contribution encore modeste au regard de la complexite du sujet.
+J'ai contribue a la mise en place d'un dispositif simple de supervision de securite pour un client de taille intermediaire : centralisation des journaux et definition, avec le consultant en charge du projet, de quelques regles d'alerte de base sur les comportements suspects, comme des tentatives de connexion repetees en dehors des horaires habituels. Il s'agissait la d'une premiere decouverte de ce sujet pour moi, avec une contribution encore modeste au regard de la complexite du sujet, et je considere que la supervision de securite reste aujourd'hui l'un des domaines ou j'ai le plus a apprendre.
 
-\subsubsection*{Mission 6 -- Accompagnement de Nawel}
+\subsubsection*{Mission 6 -- Cartographie des risques fournisseurs}
 
-Enfin, j'ai pu accompagner de maniere informelle les premiers pas de Nawel, la nouvelle alternante du pole, en partageant avec elle les methodes que j'avais moi-meme decouvertes un an plus tot, notamment sur la lecture des referentiels ISO et la logique de la methode EBIOS.
+J'ai construit, pour deux clients desormais soumis a des exigences reglementaires renforcees, une premiere cartographie des risques lies a leurs prestataires tiers. Cette mission consistait a recenser les fournisseurs ayant acces au systeme d'information du client, a evaluer leur niveau d'acces et la sensibilite des donnees auxquelles ils pouvaient acceder, puis a construire une matrice de criticite simple permettant de prioriser les fournisseurs a controler en priorite. J'ai mene cette mission de maniere largement autonome, avec une relecture de mon tuteur sur la matrice finale avant restitution au client.
+
+\subsubsection*{Mission 7 -- Sensibilisation et campagne de simulation de phishing}
+
+J'ai participe a la conception d'une campagne de simulation de phishing aupres de plus de deux cents collaborateurs d'un client, avec mesure du taux de clic avant et apres une session de sensibilisation ciblee. Le taux de clic est passe de 34\,\% avant sensibilisation a 9\,\% trois mois apres une session ciblee que j'ai coanimee avec un consultant, un resultat qui a convaincu le client d'investir durablement dans la formation de ses equipes plutot que dans le seul outillage technique. Cette mission m'a permis pour la premiere fois de quantifier objectivement l'impact d'une action de sensibilisation, alors que je n'avais, l'annee precedente, que des retours qualitatifs sur ce type d'actions.
+
+\subsubsection*{Mission 8 -- Accompagnement de Nawel et soutien ponctuel au pole commercial}
+
+Enfin, j'ai pu accompagner de maniere informelle les premiers pas de Nawel, la nouvelle alternante du pole, en partageant avec elle les methodes que j'avais moi-meme decouvertes un an plus tot, notamment sur la lecture des referentiels ISO et la logique de la methode EBIOS. J'ai egalement ete sollicite a deux reprises par le pole commercial pour apporter un premier eclairage technique lors de rendez-vous avant-vente, notamment sur un dossier avec un operateur de telecommunications algerien, une experience qui m'a fait decouvrir la dimension commerciale du metier de consultant.
+
+\subsubsection*{Mission 9 -- Veille technologique et contribution a la base de connaissances interne}
+
+En parallele de mes missions clients, j'ai consacre un temps regulier, meme s'il est reste modeste, a la veille technologique : suivi de bulletins de securite (CERT-FR notamment), lecture d'articles sur les nouvelles familles de rancongiciels observees, et suivi des evolutions reglementaires en cours. J'ai partage certains de ces elements de veille avec le reste de l'equipe lors de points informels, et j'ai commence a alimenter, avec l'accord de mon tuteur, une base de connaissances interne recensant les procedures et modeles de documents que nous utilisons le plus frequemment, un travail encore partiel a la fin de mon alternance mais que je considere utile pour les futurs alternants du pole, dont Nawel a deja pu se servir.
 
 \subsection{Mise en \oe uvre des outils et methodes choisies}
 
-Sur le plan methodologique, j'ai continue a m'appuyer sur les trois piliers -- humain, technologie, infrastructure -- qui structurent l'approche d'AccessPointCompany. Sur le pilier humain, j'ai participe a la conception d'une campagne de simulation de phishing aupres de plus de deux cents collaborateurs d'un client, avec mesure du taux de clic avant et apres une session de sensibilisation ciblee : le taux est passe de 34\,\% a 9\,\% trois mois plus tard, un resultat qui a convaincu le client d'investir durablement dans la formation de ses equipes.
+Sur le plan methodologique, j'ai continue a m'appuyer sur les trois piliers -- humain, technologie, infrastructure -- qui structurent l'approche d'AccessPointCompany.
+
+\subsubsection*{Pilier humain}
+
+Sur le pilier humain, la campagne de simulation de phishing decrite plus haut a ete mon principal terrain d'apprentissage cette annee. Au-dela de la mesure du taux de clic, j'ai participe a la conception des messages simules, en veillant a ce qu'ils restent representatifs de menaces reelles sans etre trop faciles a detecter ni trop trompeurs. J'ai egalement coanime, pour la premiere fois, une session de sensibilisation en presentiel, un exercice qui m'a demande de synthetiser des notions techniques pour un public non specialiste.
+
+\subsubsection*{Pilier technologique}
+
+Sur le pilier technologique, la methode EBIOS a ete mon principal cadre de travail sur le projet ISO 27001 interne, comme illustre ci-dessous. Construire des scenarios de risque realistes sur sa propre organisation a une resonance particuliere lorsque l'on sait que ces scenarios touchent directement son propre quotidien professionnel.
 
 \begin{center}
 \begin{tikzpicture}[
@@ -328,9 +543,21 @@ Sur le plan methodologique, j'ai continue a m'appuyer sur les trois piliers -- h
 \end{tikzpicture}
 \end{center}
 
-Sur le pilier technologique, la methode EBIOS, illustree ci-dessus, a ete mon principal cadre de travail sur le projet ISO 27001 interne : construire des scenarios de risque realistes sur sa propre organisation -- \emph{"un consultant quitte l'entreprise avec les identifiants d'acces clients"}, \emph{"un poste de travail compromis expose les rapports d'audit confidentiels de nos clients"} -- a une resonance particuliere lorsque l'on sait que ces scenarios touchent directement son propre quotidien professionnel. Sur le pilier infrastructure, j'ai decouvert les bases de la supervision de securite, un sujet sur lequel je debute encore et que je souhaite approfondir.
+Ma grille de scoring des risques, construite lors de ma premiere annee, a ete enrichie cette annee d'une dimension reglementaire : au-dela du role de l'actif, de la sensibilite des donnees et de sa resistance aux attaques, j'ai propose d'y integrer un quatrieme critere -- l'exposition reglementaire de l'actif (DORA, NIS2, RGPD) -- proposition que mon tuteur a validee et que nous avons ensuite appliquee ensemble sur plusieurs dossiers clients, dont la cartographie des risques fournisseurs decrite en mission 6.
 
-Ma grille de scoring des risques, construite lors de ma premiere annee, a ete enrichie cette annee d'une dimension reglementaire : au-dela du role de l'actif, de la sensibilite des donnees et de sa resistance aux attaques, j'ai propose d'y integrer un quatrieme critere -- l'exposition reglementaire de l'actif (DORA, NIS2, RGPD) -- proposition que mon tuteur a validee et que nous avons ensuite appliquee ensemble sur plusieurs dossiers clients.
+\subsubsection*{Pilier infrastructure}
+
+Sur le pilier infrastructure, j'ai decouvert les bases de la supervision de securite lors de la mission 5, un sujet sur lequel je debute encore et que je souhaite approfondir. J'ai egalement eu une premiere exposition, tres limitee, a des problematiques de securite des environnements cloud lors d'un audit ou le client hebergeait une partie de son infrastructure chez un fournisseur cloud public : je n'ai pas eu, sur ce point precis, l'autonomie necessaire pour aller au-dela d'un simple constat, et j'ai laisse cette partie du dossier a un consultant plus experimente sur ces sujets.
+
+\subsection{Difficultes techniques rencontrees durant les missions}
+
+Au-dela des difficultes organisationnelles que je developpe dans le bilan de ce memoire, j'ai rencontre plusieurs difficultes proprement techniques cette annee. Sur un audit chez un client disposant d'une infrastructure ancienne, j'ai eu des difficultes a interpreter certains resultats de scan Nessus, qui remontaient de nombreux faux positifs lies a des services legacy mal documentes ; j'ai du, avec l'aide de Mohamed, verifier manuellement chaque alerte avant de les integrer a mon rapport, ce qui m'a pris beaucoup plus de temps que prevu mais m'a appris a ne jamais faire confiance aveuglement a un outil automatise.
+
+Sur le projet ISO 27001 interne, la principale difficulte technique a ete de documenter des mesures de securite qui n'existaient, en pratique, que de maniere informelle : par exemple, une procedure de revocation des acces lors du depart d'un consultant existait bien dans les faits, mais n'avait jamais ete formellement ecrite. J'ai du, avec mon tuteur, formaliser cette procedure a partir des pratiques reelles observees, un exercice different de celui auquel j'etais habitue lors d'un audit client classique.
+
+Enfin, lors du test d'intrusion mentionne en mission 3, j'ai rencontre une difficulte lie a l'environnement de test lui-meme : l'application ciblee disposait d'un systeme de protection qui bloquait temporairement les adresses IP generant trop de requetes, ce qui a ralenti nos tests. Le consultant avec qui je travaillais m'a alors montre comment adapter notre rythme de tests pour rester sous ce seuil, une lecon pratique que je n'aurais pas pu acquerir uniquement par la theorie.
+
+Une derniere difficulte technique, plus diffuse, a concerne la mission de supervision de securite (mission 5) : le volume de journaux remontes par les equipements du client etait tel qu'il devenait difficile, avec les moyens simples dont nous disposions, de distinguer un signal pertinent du bruit de fond genere par l'activite normale du systeme. Je n'ai pas trouve, cette annee, de solution pleinement satisfaisante a ce probleme, et je considere que c'est precisement ce type de difficulte qui justifie mon souhait de continuer a me former sur les outils de supervision plus avances, que je n'ai fait qu'entrapercevoir chez AccessPointCompany.
 
 \subsection{Realisations individuelles et en equipe}
 
@@ -338,33 +565,64 @@ Pour etre transparent sur mon niveau reel d'autonomie cette annee, je distingue 
 
 \begin{center}
 \small
-\begin{tabular}{@{}p{5.7cm}p{7.9cm}@{}}
+\begin{longtable}{@{}p{5.7cm}p{7.9cm}@{}}
 \toprule
 \textbf{En autonomie (\guillemotleft\,je\,\guillemotright)} & \textbf{En equipe (\guillemotleft\,nous\,\guillemotright)} \\
 \midrule
+\endhead
 Realisation technique complete d'audits de vulnerabilite pour des clients PME, avec validation finale par mon tuteur. &
 Cadrage des missions les plus complexes avec le client, toujours accompagne de mon tuteur ou d'un consultant senior. \\[4pt]
 Inventaire des actifs et premiere redaction de la SoA pour le projet ISO 27001 interne. &
 Analyse de risques EBIOS du projet ISO 27001 interne, menee en atelier avec mon tuteur et un consultant. \\[4pt]
-Premiere analyse et mise en forme des resultats de la campagne de simulation de phishing. &
+Construction de la cartographie des risques fournisseurs, avec relecture finale de mon tuteur. &
 Tests d'intrusion, realises en binome avec un consultant qui validait chaque etape. \\[4pt]
+Premiere analyse et mise en forme des resultats de la campagne de simulation de phishing. &
+Conception des messages simules et animation de la session de sensibilisation, coanimee avec un consultant. \\[4pt]
 Accompagnement informel de Nawel sur des questions methodologiques simples. &
-Analyse de l'incident de securite chez un client, sous la conduite d'un consultant senior. \\
+Analyse de l'incident de securite chez un client, sous la conduite d'un consultant senior. \\[4pt]
+Verification manuelle des faux positifs remontes par les scans automatises. &
+Mise en place du dispositif de supervision de securite, avec un consultant en charge du projet. \\
 \bottomrule
-\end{tabular}
+\end{longtable}
 \end{center}
 
+\newpage
 \section{Bilan de l'annee ecoulee}
 
 \subsection{Competences developpees, acquises et manquantes}
 
-Cette annee m'a permis de developper des competences que je ne maitrisais qu'en theorie l'annee precedente : une lecture plus fine des referentiels ISO 27001 et ISO 22301, une premiere pratique reelle -- bien qu'encadree -- du test d'intrusion, et une decouverte du fonctionnement d'un projet de certification de l'interieur. J'ai egalement developpe des competences transverses : vulgarisation d'un resultat technique pour un public non technique, gestion de plusieurs dossiers en parallele, et une premiere experience, modeste, de transmission aupres d'une collegue plus junior que moi.
+\subsubsection*{Competences techniques}
 
-Au regard du programme de cours de l'ESILV, plusieurs enseignements se sont retrouves directement mobilises cette annee : la gestion des risques et les referentiels de securite, la cryptographie, l'architecture reseau securisee, ainsi que la gestion de projet et le travail en equipe pluridisciplinaire. A l'inverse, je considere que certaines competences me manquent encore pour etre pleinement operationnel sur les missions les plus avancees que j'ai pu observer cette annee : la securite des environnements cloud (AWS, Azure), les pratiques DevSecOps et la securisation des chaines d'integration continue, ainsi qu'une connaissance plus approfondie du droit penal du numerique et des techniques d'investigation numerique (forensic) avancees.
+Cette annee m'a permis de developper des competences que je ne maitrisais qu'en theorie l'annee precedente : une lecture plus fine des referentiels ISO 27001 et ISO 22301, une premiere pratique reelle -- bien qu'encadree -- du test d'intrusion, une decouverte du fonctionnement d'un projet de certification de l'interieur, et une premiere approche, encore limitee, de la supervision de securite et des risques fournisseurs.
+
+\subsubsection*{Competences transverses et humaines}
+
+J'ai egalement developpe des competences transverses : vulgarisation d'un resultat technique pour un public non technique, gestion de plusieurs dossiers en parallele sans perdre en qualite, une premiere experience de communication commerciale a l'occasion des rendez-vous avant-vente, et une premiere experience, modeste, de transmission aupres d'une collegue plus junior que moi.
+
+\subsubsection*{Competences manquantes}
+
+A l'inverse, je considere que certaines competences me manquent encore pour etre pleinement operationnel sur les missions les plus avancees que j'ai pu observer cette annee : la securite des environnements cloud (AWS, Azure), les pratiques DevSecOps et la securisation des chaines d'integration continue, une connaissance plus approfondie du droit penal du numerique, ainsi que les techniques d'investigation numerique (forensic) avancees, dont je n'ai vu qu'un apercu tres limite lors de la mission 4.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{6.0cm}p{8.0cm}@{}}
+\toprule
+\textbf{Enseignement ESILV} & \textbf{Mobilisation durant l'alternance} \\
+\midrule
+Gestion des risques et referentiels de securite & Application quotidienne de la methode EBIOS et des normes ISO 27001 / 22301 \\
+Cryptographie & Comprehension des mecanismes d'authentification et de chiffrement audites \\
+Architecture reseau securisee & Lecture des infrastructures clientes lors des audits et tests d'intrusion \\
+Droit du numerique et protection des donnees & Prise en compte du RGPD, decouverte approfondie de NIS2 et DORA \\
+Gestion de projet et travail en equipe & Suivi de plusieurs dossiers en parallele, collaboration avec Nawel et Mohamed \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 \subsection{Lien avec ma majeure}
 
-La majeure Cybersecurite et Reseaux (OCC) suivie a l'ESILV a ete directement mobilisee tout au long de cette annee : les cours de gestion des risques m'ont donne le cadre theorique necessaire pour comprendre et appliquer la methode EBIOS, les enseignements en architecture reseau m'ont aide a mieux lire les infrastructures auditees, et les cours de droit du numerique m'ont permis de comprendre les enjeux reglementaires (RGPD, NIS2, DORA) rencontres sur le terrain. Cette annee a confirme que la majeure choisie correspond bien au metier que je souhaite exercer.
+La majeure Cybersecurite et Reseaux (OCC) suivie a l'ESILV a ete directement mobilisee tout au long de cette annee, comme le montre le tableau ci-dessus. Les cours de gestion des risques m'ont donne le cadre theorique necessaire pour comprendre et appliquer la methode EBIOS, les enseignements en architecture reseau m'ont aide a mieux lire les infrastructures auditees, et les cours de droit du numerique m'ont permis de comprendre les enjeux reglementaires (RGPD, NIS2, DORA) rencontres sur le terrain. Cette annee a confirme que la majeure choisie correspond bien au metier que je souhaite exercer, meme si elle a egalement revele des zones -- cloud, DevSecOps -- ou mes enseignements academiques restent encore theoriques par rapport a ce qu'exige le terrain.
+
+Je note egalement que la maniere dont l'ESILV structure ses enseignements en travaux pratiques et en projets de groupe m'a directement prepare a la logique des missions en binome que j'ai vecues cette annee, notamment lors des tests d'intrusion : la meme discipline de documentation, de repartition des taches et de restitution structuree que celle demandee dans nos projets d'ecole s'est retrouvee, presque a l'identique, dans mon quotidien professionnel.
 
 \subsection{Difficultes rencontrees et solutions apportees}
 
@@ -372,41 +630,129 @@ La principale difficulte de cette annee a ete de trouver le bon niveau d'autonom
 
 Une seconde difficulte a ete la contribution au projet ISO 27001 interne : documenter des ecarts qui concernaient mon propre environnement de travail m'a mis mal a l'aise au debut, par crainte de pointer du doigt des pratiques de mes collegues. J'ai appris, avec les conseils de mon tuteur, a presenter les constats de maniere factuelle et centree sur l'amelioration collective plutot que sur la recherche de responsables.
 
-Enfin, accompagner Nawel tout en continuant a apprendre moi-meme n'a pas toujours ete simple : il m'est arrive de lui transmettre des explications encore imparfaites. Cela m'a appris a etre plus rigoureux dans ma propre comprehension avant de l'expliquer a quelqu'un d'autre, et a ne pas hesiter a lui dire quand je n'etais pas sur d'une reponse.
+Une troisieme difficulte a ete d'ordre technique et deja evoquee plus haut : la gestion des faux positifs lors des scans automatises sur des infrastructures anciennes, qui m'a demande de developper de la rigueur et de la patience, avec l'appui de Mohamed pour verifier mes conclusions.
+
+Enfin, accompagner Nawel tout en continuant a apprendre moi-meme n'a pas toujours ete simple : il m'est arrive de lui transmettre des explications encore imparfaites. Cela m'a appris a etre plus rigoureux dans ma propre comprehension avant de l'expliquer a quelqu'un d'autre, et a ne pas hesiter a lui dire quand je n'etais pas sur d'une reponse -- une posture d'humilite que je considere aujourd'hui comme une competence a part entiere.
 
 \subsection{Succes, bonnes pratiques et positionnement par rapport aux objectifs initiaux}
 
-Sur les trois objectifs fixes en debut d'annee, je considere avoir atteint le premier -- gagner en autonomie sur les missions deja maitrisees -- de maniere satisfaisante. Le deuxieme objectif, elargir mon perimetre technique, a egalement ete atteint, meme si ma contribution sur les tests d'intrusion et la supervision de securite reste encore celle d'un binome plutot que d'un consultant autonome sur ces sujets. Le troisieme objectif, decouvrir la dimension GRC du metier via le projet ISO 27001 interne, a ete pour moi le plus reussi et le plus marquant de l'annee.
+Sur les trois objectifs fixes en debut d'annee, je considere avoir atteint le premier -- gagner en autonomie sur les missions deja maitrisees -- de maniere satisfaisante : les audits de vulnerabilite et la cartographie des risques fournisseurs ont ete menes de maniere largement autonome, avec une relecture finale de mon tuteur. Le deuxieme objectif, elargir mon perimetre technique, a egalement ete atteint, meme si ma contribution sur les tests d'intrusion et la supervision de securite reste encore celle d'un binome plutot que d'un consultant autonome sur ces sujets. Le troisieme objectif, decouvrir la dimension GRC du metier via le projet ISO 27001 interne, a ete pour moi le plus reussi et le plus marquant de l'annee.
 
-Parmi les bonnes pratiques que je retiens : le point hebdomadaire avec mon tuteur, qui a nettement ameliore ma gestion du temps et ma capacite a demander de l'aide ; et la simplicite operationnelle privilegiee par AccessPointCompany dans ses livrables, une philosophie que j'ai essaye d'appliquer moi-meme dans mes propres restitutions. Comme axe d'amelioration pour la suite, je souhaite continuer a developper mon autonomie sur les tests d'intrusion et la supervision de securite, deux sujets sur lesquels je reste aujourd'hui encore junior.
+Parmi les bonnes pratiques que je retiens : le point hebdomadaire avec mon tuteur, qui a nettement ameliore ma gestion du temps et ma capacite a demander de l'aide ; la verification systematique des resultats des outils automatises avant de les integrer a un livrable ; et la simplicite operationnelle privilegiee par AccessPointCompany dans ses livrables, une philosophie que j'ai essaye d'appliquer moi-meme dans mes propres restitutions. Comme axe d'amelioration pour la suite, je souhaite continuer a developper mon autonomie sur les tests d'intrusion et la supervision de securite, deux sujets sur lesquels je reste aujourd'hui encore junior, ainsi que sur les problematiques de securite du cloud, que je n'ai qu'entr'apercues cette annee.
+
+Pour objectiver ce positionnement plutot que de rester sur une impression generale, j'ai construit, avec mon tuteur, une grille d'auto-evaluation simple sur les principaux domaines abordes cette annee, en distinguant quatre niveaux : \emph{decouverte} (premiere exposition au sujet), \emph{notionnel} (je comprends les enjeux mais je ne suis pas operationnel seul), \emph{operationnel encadre} (je peux realiser la tache seul, sous supervision ou avec relecture) et \emph{autonome} (je peux realiser la tache seul, sans relecture systematique).
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{5.5cm}p{4.4cm}p{4.1cm}@{}}
+\toprule
+\textbf{Domaine} & \textbf{Debut d'annee} & \textbf{Fin d'annee} \\
+\midrule
+Audit de vulnerabilite (ISO 27001/22301) & Operationnel encadre & Autonome \\
+Plan de continuite d'activite & Operationnel encadre & Autonome \\
+Analyse de risques EBIOS & Notionnel & Operationnel encadre \\
+Test d'intrusion & Decouverte & Operationnel encadre (en binome) \\
+Analyse post-incident & Decouverte & Notionnel \\
+Supervision de securite (SOC) & Decouverte & Notionnel \\
+Cartographie des risques fournisseurs & Decouverte & Operationnel encadre \\
+Communication et vulgarisation client & Notionnel & Operationnel encadre \\
+Securite des environnements cloud & Decouverte & Decouverte \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Cette grille confirme le constat qualitatif fait plus haut : ma progression est reelle sur les sujets deja abordes en premiere annee, plus timide sur les sujets nouveaux comme le test d'intrusion ou la supervision, et quasiment nulle sur des sujets que je n'ai qu'effleures, comme la securite du cloud. Je considere que c'est une photographie honnete de mon niveau actuel, sans exageration ni fausse modestie.
+
+\subsection{Retours de mon tuteur et de mes pairs}
+
+Pour ne pas fonder ce bilan uniquement sur mon propre ressenti, j'ai demande a mon tuteur et a Mohamed de me faire un retour ecrit sur mon evolution cette annee, en toute franchise.
+
+\begin{encart}[title={Retour d'Amir Achache, tuteur d'alternance}]
+\textit{"Samy a fait de reels progres cette annee, en particulier sur sa capacite a structurer un dossier et a savoir quand solliciter de l'aide plutot que de rester bloque seul. Il reste encore junior sur les sujets les plus techniques comme le pentest ou la supervision, ce qui est normal a ce stade, mais sa rigueur sur les audits et sa contribution au projet ISO 27001 interne ont ete au-dessus de ce que j'attendais d'un alternant de son niveau."}
+\end{encart}
+
+\begin{encart}[title={Retour de Mohamed, alternant IT-Cybersecurite}]
+\textit{"Ce qui a change chez Samy cette annee, c'est qu'il pose des questions plus precises qu'avant, et qu'il vient me voir avec une hypothese deja construite plutot qu'avec un probleme brut. Sur les scans de vulnerabilite avec beaucoup de faux positifs, il a ete tres perseverant. Il a encore des choses a apprendre sur la partie supervision, comme moi d'ailleurs."}
+\end{encart}
+
+Ces deux retours convergent avec ma propre auto-evaluation : une progression reelle et reconnue par mon entourage professionnel, mais qui reste celle d'un alternant en cours de formation, et non celle d'un consultant confirme.
 
 \subsection{Plan de carriere a court et moyen terme}
 
-A court terme, a l'issue de ce cycle ingenieur, je souhaite integrer un poste de consultant junior en cybersecurite, idealement dans une structure ou je pourrai continuer a etre accompagne par des profils seniors, comme cela a ete le cas chez AccessPointCompany. Je souhaite egalement passer une premiere certification professionnelle reconnue dans le secteur (par exemple ISO 27001 Lead Implementer ou une certification technique de type CEH) dans les deux prochaines annees, pour consolider les bases acquises durant mon alternance.
+A court terme, a l'issue de ce cycle ingenieur, je souhaite integrer un poste de consultant junior en cybersecurite, idealement dans une structure ou je pourrai continuer a etre accompagne par des profils seniors, comme cela a ete le cas chez AccessPointCompany. Je souhaite egalement passer une premiere certification professionnelle reconnue dans le secteur, par exemple ISO 27001 Lead Implementer ou une certification technique de type CEH, dans les deux prochaines annees, pour consolider les bases acquises durant mon alternance et combler certaines des lacunes identifiees plus haut, notamment sur le cloud.
 
-A moyen terme, sur un horizon de trois a cinq ans, je souhaite continuer a monter en competence vers un role de consultant confirme, avec une specialisation progressive dans la gouvernance, les risques et la conformite (GRC), un axe que la contribution au projet de certification ISO 27001 interne d'AccessPointCompany m'a permis de decouvrir et qui correspond, je le pense, a la maniere dont je souhaite exercer ce metier : allier la rigueur technique acquise pendant mes deux annees d'alternance a une comprehension plus strategique des enjeux de securite des organisations.
+A moyen terme, sur un horizon de trois a cinq ans, je souhaite continuer a monter en competence vers un role de consultant confirme, avec une specialisation progressive dans la gouvernance, les risques et la conformite (GRC), un axe que la contribution au projet de certification ISO 27001 interne d'AccessPointCompany m'a permis de decouvrir et qui correspond, je le pense, a la maniere dont je souhaite exercer ce metier : allier la rigueur technique acquise pendant mes deux annees d'alternance a une comprehension plus strategique des enjeux de securite des organisations. Je garde a l'esprit qu'il s'agit d'une trajectoire progressive, et que je n'en suis aujourd'hui qu'au tout debut.
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
 Ces deux annees d'alternance chez AccessPointCompany ont ete determinantes pour moi. La premiere m'avait ouvert les yeux sur la dimension humaine de la cybersecurite ; cette seconde annee m'a appris que gagner en autonomie est un processus progressif, qui passe par la capacite a solliciter les bonnes personnes au bon moment, et non par le fait de travailler seul. J'ai decouvert qu'etre un bon consultant en cybersecurite, ce n'est pas seulement savoir trouver des vulnerabilites ou construire un plan de continuite, c'est aussi savoir apprendre en continu, accepter d'etre encore accompagne sur certains sujets, et commencer, humblement, a transmettre ce que l'on sait a ceux qui arrivent apres nous.
 
-Cette experience de fin de cycle a ete decisive dans la definition de mon projet professionnel : je souhaite desormais m'orienter vers un metier a l'intersection de la technique et de la gouvernance, dans la continuite directe de ce que j'ai commence a decouvrir sur le projet de certification ISO 27001 d'AccessPointCompany. J'aborde la suite de ma carriere consciente qu'il me reste encore beaucoup a apprendre, mais avec la conviction d'avoir trouve un metier, une equipe et une maniere d'exercer ce metier qui me correspondent.
+Pour repondre a la problematique posee en introduction, je crois pouvoir dire que ma progression cette annee n'est pas passee par une autonomie totale et soudaine, mais par une serie de petits pas : un dossier mene seul ici, un binome bien accompagne la, une question posee a temps plutot que trop tard. C'est cette accumulation de petites responsabilites, plus que la prise en charge d'un unique grand projet, qui a fait de moi un alternant plus mature en fin d'annee qu'au debut.
+
+Cette experience de fin de cycle a ete decisive dans la definition de mon projet professionnel : je souhaite desormais m'orienter vers un metier a l'intersection de la technique et de la gouvernance, dans la continuite directe de ce que j'ai commence a decouvrir sur le projet de certification ISO 27001 d'AccessPointCompany. J'aborde la suite de ma carriere consciente qu'il me reste encore beaucoup a apprendre, en particulier sur le cloud, la supervision de securite et le test d'intrusion, mais avec la conviction d'avoir trouve un metier, une equipe et une maniere d'exercer ce metier qui me correspondent.
+
+En relisant ce memoire, ainsi que celui redige un an plus tot, je mesure a quel point ces deux annees ont ete complementaires : la premiere m'a donne les fondamentaux du metier, la seconde m'a appris a les mettre en \oe uvre avec un peu plus de recul, de responsabilite et de discernement sur quand agir seul et quand demander de l'aide. C'est avec cette double lecon, technique et humaine, que je quitte aujourd'hui le statut d'alternant pour entamer la suite de mon parcours professionnel.
+
+\newpage
+\section*{Glossaire et liste des sigles}
+\addcontentsline{toc}{section}{Glossaire et liste des sigles}
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{2.6cm}p{10.8cm}@{}}
+\toprule
+\textbf{Sigle} & \textbf{Signification} \\
+\midrule
+\endhead
+ANSSI & Agence Nationale de la Securite des Systemes d'Information \\
+COMEX & Comite Executif \\
+CVSS & Common Vulnerability Scoring System, echelle de notation de la criticite d'une vulnerabilite \\
+DD-RSE & Developpement Durable et Responsabilite Societale des Entreprises \\
+DORA & Digital Operational Resilience Act, reglement europeen sur la resilience operationnelle numerique du secteur financier \\
+EBIOS & Expression des Besoins et Identification des Objectifs de Securite, methode d'analyse de risques \\
+EDR & Endpoint Detection and Response \\
+ENISA & Agence de l'Union europeenne pour la cybersecurite \\
+ESN & Entreprise de Services du Numerique \\
+GRC & Gouvernance, Risques et Conformite \\
+NIS2 & Network and Information Security 2, directive europeenne de cybersecurite \\
+PCA & Plan de Continuite d'Activite \\
+PRA & Plan de Reprise d'Activite \\
+RGPD & Reglement General sur la Protection des Donnees \\
+RPO & Recovery Point Objective, perte de donnees maximale tolerable \\
+RTO & Recovery Time Objective, duree maximale d'indisponibilite tolerable \\
+SIEM & Security Information and Event Management \\
+SMSI & Systeme de Management de la Securite de l'Information \\
+SoA & Statement of Applicability, declaration d'applicabilite (ISO 27001) \\
+SOC & Security Operations Center, centre de supervision de securite \\
+\bottomrule
+\end{longtable}
+\end{center}
 
 \newpage
 \section*{Annexes}
 \addcontentsline{toc}{section}{Annexes}
 
-\annexeimg{Declaration d'applicabilite (SoA) -- projet ISO 27001 interne AccessPointCompany}{6.5}{Extrait de la Statement of Applicability recensant les mesures de l'Annexe A ISO 27001 retenues, avec justification de l'inclusion ou de l'exclusion pour chaque mesure.}
+Les elements ci-dessous sont des emplacements reserves, a completer avec les captures d'ecran, extraits de rapports et supports reels produits durant l'annee, dans le respect de la confidentialite des clients concernes. Ils sont presentes dans l'ordre ou les missions correspondantes ont ete decrites dans le corps de ce memoire, afin de faciliter la lecture croisee entre le texte et les pieces justificatives.
 
-\annexeimg{Dashboard de supervision de securite}{6.5}{Tableau de bord centralisant les alertes de securite d'un client, avec code couleur par criticite et flux de logs agreges.}
+\annexeimg{Declaration d'applicabilite (SoA) -- projet ISO 27001 interne AccessPointCompany}{6}{Extrait de la Statement of Applicability recensant les mesures de l'Annexe A ISO 27001 retenues, avec justification de l'inclusion ou de l'exclusion pour chaque mesure.}
 
-\annexeimg{Resultats de la campagne de simulation de phishing}{6.5}{Graphique comparant le taux de clic sur emails de phishing simules avant et apres la session de sensibilisation ciblee (34\% puis 9\%).}
+\annexeimg{Dashboard de supervision de securite}{6}{Tableau de bord centralisant les alertes de securite d'un client, avec code couleur par criticite et flux de logs agreges.}
 
-\annexeimg{Chronologie simplifiee -- analyse d'incident rancongiciel}{6.5}{Chronologie reconstituee de la propagation de l'attaque, du vecteur d'entree initial jusqu'au chiffrement partiel des serveurs de fichiers.}
+\annexeimg{Resultats de la campagne de simulation de phishing}{6}{Graphique comparant le taux de clic sur emails de phishing simules avant et apres la session de sensibilisation ciblee (34\% puis 9\%).}
 
-\annexeimg{Cartographie des risques fournisseurs (tiers)}{6.5}{Matrice de criticite des prestataires tiers d'un client, croisant niveau d'acces au systeme d'information et sensibilite des donnees traitees.}
+\annexeimg{Chronologie simplifiee -- analyse d'incident rancongiciel}{6}{Chronologie reconstituee de la propagation de l'attaque, du vecteur d'entree initial jusqu'au chiffrement partiel des serveurs de fichiers.}
 
-\annexeimg{Retroplanning de l'annee d'alternance}{6}{Vue synthetique du plan de route de l'annee, presente en section 2.2, sous forme de frise chronologique.}
+\annexeimg{Cartographie des risques fournisseurs (tiers)}{6}{Matrice de criticite des prestataires tiers d'un client, croisant niveau d'acces au systeme d'information et sensibilite des donnees traitees.}
+
+\annexeimg{Extrait de rapport d'audit de vulnerabilite}{6}{Page de synthese d'un rapport d'audit, presentant les vulnerabilites classees par criticite et les recommandations associees.}
+
+\annexeimg{Support de restitution -- test d'intrusion en binome}{6}{Extrait du rapport de test d'intrusion presentant la faille identifiee et son niveau de risque business.}
+
+\annexeimg{Grille de scoring des risques enrichie du critere reglementaire}{6}{Grille de criticite des actifs integrant le role de l'actif, la sensibilite des donnees, la resistance aux attaques et l'exposition reglementaire (DORA, NIS2, RGPD).}
+
+\annexeimg{Retroplanning de l'annee d'alternance}{6}{Vue synthetique du plan de route de l'annee, presente en section 2.2, sous forme de frise chronologique annotee.}
+
+\annexeimg{Extrait de la base de connaissances interne du pole IT-Cybersecurite}{6}{Sommaire de la base de connaissances alimentee en fin d'annee, recensant les procedures et modeles de documents les plus utilises par l'equipe.}
 
 \end{document}

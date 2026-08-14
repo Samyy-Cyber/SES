@@ -51,27 +51,10 @@
 
 \onehalfspacing
 
-% ---------- Boite "encart temoignage / focus" ----------
-\newtcolorbox{encart}[1][]{
-  colback=lightgrey, colframe=apcblue, boxrule=0.6pt,
-  arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
-  fonttitle=\bfseries, breakable, #1
-}
-
-% ---------- Boite "placeholder annexe" (a remplacer par une vraie capture) ----------
-\newcommand{\annexeimg}[3]{%
-  \begin{center}
-  \begin{tcolorbox}[colback=white,colframe=apcblue,arc=1pt,width=0.92\textwidth,
-    title={#1},fonttitle=\bfseries\small,breakable]
-  \centering
-  \begin{tikzpicture}
-    \draw[draw=darkgrey!50,fill=lightgrey,dashed] (0,0) rectangle (12,#2);
-    \node[align=center,text width=11cm,font=\small\itshape\color{darkgrey}] at (6,#2/2) {#3};
-  \end{tikzpicture}
-  \\[2pt]
-  {\scriptsize\itshape Emplacement reserve a la capture d'ecran reelle -- a inserer avec \texttt{\textbackslash includegraphics}.}
-  \end{tcolorbox}
-  \end{center}
+% ---------- Citation simple (temoignage / retour d'une personne) ----------
+\newcommand{\citationperso}[2]{%
+\par\smallskip\noindent\begin{quote}\itshape #1\end{quote}
+\hfill --- #2\par\smallskip
 }
 
 \title{}
@@ -344,9 +327,7 @@ J'ai realise ma seconde annee d'alternance au sein du departement IT-Cybersecuri
 
 Concretement, mon role est reste celui d'un alternant, mais avec un niveau d'exigence et de responsabilite plus eleve qu'en premiere annee : cadrage d'une partie des missions avec le client sous supervision, realisation technique en autonomie ou en binome selon la complexite du sujet, redaction de livrables desormais relus mais moins systematiquement corriges par mon tuteur. Une semaine type se compose generalement de deux a trois demi-journees consacrees a un audit ou a un dossier en cours, d'un temps dedie au projet de certification ISO 27001 interne, d'un point hebdomadaire avec mon tuteur, et de moments plus informels d'echange avec Nawel ou Amine sur des questions techniques. J'ai egalement pu, pour la premiere fois, partager mon experience avec Nawel, la nouvelle alternante arrivee cette annee, sur des sujets simples ou je me sentais legitime.
 
-\begin{encart}[title={Temoignage -- Nawel, alternante IT-Cybersecurite}]
-\textit{"Samy a ete l'une des premieres personnes a qui j'ai pose mes questions les plus basiques sans avoir peur d'avoir l'air idiote. Il m'a explique la methode EBIOS avec ses propres mots, pas avec ceux du referentiel, et ca m'a beaucoup aidee a demarrer."}
-\end{encart}
+\citationperso{Samy a ete l'une des premieres personnes a qui j'ai pose mes questions les plus basiques sans avoir peur d'avoir l'air idiote. Il m'a explique la methode EBIOS avec ses propres mots, pas avec ceux du referentiel, et ca m'a beaucoup aidee a demarrer.}{Nawel, alternante IT-Cybersecurite}
 
 \subsection{Comparaison avec ma premiere annee d'alternance}
 
@@ -479,9 +460,7 @@ La mission la plus formatrice de mon annee a ete ma contribution, sous la respon
 
 Parmi les mesures de l'Annexe A que j'ai eu a documenter, trois m'ont particulierement marque. La mesure relative au controle des acces m'a demande de retracer, avec l'aide de mon tuteur, qui avait acces a quoi au sein de l'entreprise, un exercice plus complexe que prevu tant les acces s'etaient accumules au fil des annees sans revue systematique. La mesure relative a la gestion des incidents de securite m'a permis de reutiliser, dans un contexte interne cette fois, les reflexes acquis lors de la mission 4 decrite plus loin. Enfin, la mesure relative a la sensibilisation du personnel a ete l'occasion d'un echange interessant avec mon tuteur sur la difficulte, pour une entreprise de cybersecurite, de former ses propres consultants sans tomber dans un discours trop evident pour des experts du sujet.
 
-\begin{encart}[title=Ce que ce projet m'a appris]
-Etre implique dans l'audit de sa propre entreprise est un exercice plus inconfortable qu'on ne l'imagine, meme lorsqu'on n'en est pas le pilote. J'ai appris a documenter des ecarts qui me concernaient directement, et a accepter les remarques de mon tuteur sur des livrables que je pensais aboutis.
-\end{encart}
+\textbf{Ce que ce projet m'a appris.} Etre implique dans l'audit de sa propre entreprise est un exercice plus inconfortable qu'on ne l'imagine, meme lorsqu'on n'en est pas le pilote. J'ai appris a documenter des ecarts qui me concernaient directement, et a accepter les remarques de mon tuteur sur des livrables que je pensais aboutis.
 
 \subsubsection*{Mission 3 -- Tests d'intrusion en binome}
 
@@ -637,7 +616,7 @@ La question que j'ai choisi d'explorer est la suivante : \emph{l'effet d'une ses
 
 \subsubsection*{Cadre theorique}
 
-Ce travail s'appuie sur deux notions issues des sciences de l'apprentissage. La premiere est la courbe de l'oubli, popularisee par les travaux du psychologue Hermann Ebbinghaus a la fin du XIXe siecle, qui montre que la retention d'une information nouvelle decroit rapidement apres son acquisition si elle n'est pas revue. La seconde est le principe de repetition espacee, qui montre que des rappels courts et repartis dans le temps ameliorent la retention bien plus efficacement qu'une unique session longue, a duree totale d'apprentissage comparable. Applique a la cybersecurite, ce cadre suggere qu'une vigilance face au phishing pourrait suivre la meme dynamique qu'une connaissance scolaire : forte immediatement apres la formation, puis declinante si elle n'est jamais rappelee.
+Pour essayer de comprendre pourquoi l'effet d'une session de sensibilisation pourrait s'attenuer avec le temps, je suis parti d'une idee assez simple, que j'ai retrouvee dans plusieurs lectures sur la pedagogie et sur la sensibilisation en entreprise : une information vue une seule fois est en general vite oubliee si elle n'est jamais rappelee, alors qu'elle est bien mieux retenue si on la revoit plusieurs fois, meme brievement, a intervalles reguliers. C'est ce qu'on appelle parfois la courbe de l'oubli et la repetition espacee. Je n'ai pas de formation poussee en sciences cognitives, mais ce constat rejoint quelque chose que j'observe moi-meme depuis mes annees de prepa et d'ecole : je retiens toujours mieux un cours que je relis plusieurs fois dans la semaine qu'un cours lu une seule fois juste avant le controle. J'ai donc fait l'hypothese que la vigilance face au phishing pourrait suivre une logique assez proche : forte juste apres une session de sensibilisation, puis en baisse si elle n'est jamais reactivee.
 
 \subsubsection*{Que sait-on deja ?}
 
@@ -797,13 +776,9 @@ Cette grille confirme le constat qualitatif fait plus haut : ma progression est 
 
 Pour ne pas fonder ce bilan uniquement sur mon propre ressenti, j'ai demande a mon tuteur et a Amine de me faire un retour ecrit sur mon evolution cette annee, en toute franchise.
 
-\begin{encart}[title={Retour d'Amir Achache, tuteur d'alternance}]
-\textit{"Samy a fait de reels progres cette annee, en particulier sur sa capacite a structurer un dossier et a savoir quand solliciter de l'aide plutot que de rester bloque seul. Il reste encore junior sur les sujets les plus techniques comme le pentest ou la supervision, ce qui est normal a ce stade, mais sa rigueur sur les audits et sa contribution au projet ISO 27001 interne ont ete au-dessus de ce que j'attendais d'un alternant de son niveau."}
-\end{encart}
+\citationperso{Samy a fait de reels progres cette annee, en particulier sur sa capacite a structurer un dossier et a savoir quand solliciter de l'aide plutot que de rester bloque seul. Il reste encore junior sur les sujets les plus techniques comme le pentest ou la supervision, ce qui est normal a ce stade, mais sa rigueur sur les audits et sa contribution au projet ISO 27001 interne ont ete au-dessus de ce que j'attendais d'un alternant de son niveau.}{Amir Achache, tuteur d'alternance}
 
-\begin{encart}[title={Retour d'Amine, alternant IT-Cybersecurite}]
-\textit{"Ce qui a change chez Samy cette annee, c'est qu'il pose des questions plus precises qu'avant, et qu'il vient me voir avec une hypothese deja construite plutot qu'avec un probleme brut. Sur les scans de vulnerabilite avec beaucoup de faux positifs, il a ete tres perseverant. Il a encore des choses a apprendre sur la partie supervision, comme moi d'ailleurs."}
-\end{encart}
+\citationperso{Ce qui a change chez Samy cette annee, c'est qu'il pose des questions plus precises qu'avant, et qu'il vient me voir avec une hypothese deja construite plutot qu'avec un probleme brut. Sur les scans de vulnerabilite avec beaucoup de faux positifs, il a ete tres perseverant. Il a encore des choses a apprendre sur la partie supervision, comme moi d'ailleurs.}{Amine, alternant IT-Cybersecurite}
 
 Ces deux retours convergent avec ma propre auto-evaluation : une progression reelle et reconnue par mon entourage professionnel, mais qui reste celle d'un alternant en cours de formation, et non celle d'un consultant confirme.
 
@@ -858,31 +833,5 @@ SOC & Security Operations Center, centre de supervision de securite \\
 \bottomrule
 \end{longtable}
 \end{center}
-
-\newpage
-\section*{Annexes}
-\addcontentsline{toc}{section}{Annexes}
-
-Les elements ci-dessous sont des emplacements reserves, a completer avec les captures d'ecran, extraits de rapports et supports reels produits durant l'annee, dans le respect de la confidentialite des clients concernes. Ils sont presentes dans l'ordre ou les missions correspondantes ont ete decrites dans le corps de ce memoire, afin de faciliter la lecture croisee entre le texte et les pieces justificatives.
-
-\annexeimg{Declaration d'applicabilite (SoA) -- projet ISO 27001 interne AccessPointCompany}{6}{Extrait de la Statement of Applicability recensant les mesures de l'Annexe A ISO 27001 retenues, avec justification de l'inclusion ou de l'exclusion pour chaque mesure.}
-
-\annexeimg{Dashboard de supervision de securite}{6}{Tableau de bord centralisant les alertes de securite d'un client, avec code couleur par criticite et flux de logs agreges.}
-
-\annexeimg{Resultats de la campagne de simulation de phishing}{6}{Graphique comparant le taux de clic sur emails de phishing simules avant et apres la session de sensibilisation ciblee (34\% puis 9\%).}
-
-\annexeimg{Chronologie simplifiee -- analyse d'incident rancongiciel}{6}{Chronologie reconstituee de la propagation de l'attaque, du vecteur d'entree initial jusqu'au chiffrement partiel des serveurs de fichiers.}
-
-\annexeimg{Cartographie des risques fournisseurs (tiers)}{6}{Matrice de criticite des prestataires tiers d'un client, croisant niveau d'acces au systeme d'information et sensibilite des donnees traitees.}
-
-\annexeimg{Extrait de rapport d'audit de vulnerabilite}{6}{Page de synthese d'un rapport d'audit, presentant les vulnerabilites classees par criticite et les recommandations associees.}
-
-\annexeimg{Support de restitution -- test d'intrusion en binome}{6}{Extrait du rapport de test d'intrusion presentant la faille identifiee et son niveau de risque business.}
-
-\annexeimg{Grille de scoring des risques enrichie du critere reglementaire}{6}{Grille de criticite des actifs integrant le role de l'actif, la sensibilite des donnees, la resistance aux attaques et l'exposition reglementaire (DORA, NIS2, RGPD).}
-
-\annexeimg{Retroplanning de l'annee d'alternance}{6}{Vue synthetique du plan de route de l'annee, presente en section 2.2, sous forme de frise chronologique annotee.}
-
-\annexeimg{Extrait de la base de connaissances interne du pole IT-Cybersecurite}{6}{Sommaire de la base de connaissances alimentee en fin d'annee, recensant les procedures et modeles de documents les plus utilises par l'equipe.}
 
 \end{document}

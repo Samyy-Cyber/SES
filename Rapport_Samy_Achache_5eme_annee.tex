@@ -186,7 +186,7 @@ Pour construire ce memoire, je me suis appuye sur un journal de bord tenu tout a
 
 La problematique qui traverse ce memoire est la suivante : \emph{comment un alternant, encore junior a l'entree de cette seconde annee, peut-il progressivement gagner en autonomie sur des missions de cybersecurite a responsabilite croissante, tout en continuant a apprendre au contact de son equipe et en commencant lui-meme a transmettre ce qu'il sait ?} Cette question n'est pas seulement personnelle : elle rejoint un enjeu plus large du secteur de la cybersecurite, confronte a une penurie de talents qui oblige les entreprises comme AccessPointCompany a former rapidement, mais serieusement, de jeunes profils.
 
-Pour y repondre, ce memoire est organise en quatre parties. La premiere partie etudie le positionnement de mon alternance : le secteur economique de la cybersecurite dans lequel elle s'est deroulee, l'engagement de ce secteur en matiere de developpement durable et de responsabilite societale, le cadre reglementaire qui le structure, et la maniere dont AccessPointCompany, puis moi-meme, nous positionnons au sein de cet ecosysteme. La deuxieme partie presente mon alternance : les objectifs qui m'ont ete fixes, le plan de route suivi sur l'annee, les methodes et les outils mobilises, et les equipes avec lesquelles j'ai collabore. La troisieme partie retrace le deroulement concret de mon annee, mission par mission, en detaillant la mise en \oe uvre des outils et methodes choisies ainsi que les difficultes techniques rencontrees. Enfin, la quatrieme partie dresse le bilan de cette annee ecoulee : les competences developpees et celles qui me manquent encore, le lien avec ma majeure, les difficultes organisationnelles et humaines rencontrees, mes reussites et mes axes d'amelioration, et le plan de carriere que je me suis fixe pour la suite.
+Pour y repondre, ce memoire est organise en cinq parties. La premiere partie etudie le positionnement de mon alternance : le secteur economique de la cybersecurite dans lequel elle s'est deroulee, l'engagement de ce secteur en matiere de developpement durable et de responsabilite societale, le cadre reglementaire qui le structure, et la maniere dont AccessPointCompany, puis moi-meme, nous positionnons au sein de cet ecosysteme. La deuxieme partie presente mon alternance : les objectifs qui m'ont ete fixes, le plan de route suivi sur l'annee, les methodes et les outils mobilises, et les equipes avec lesquelles j'ai collabore. La troisieme partie retrace le deroulement concret de mon annee, mission par mission, en detaillant la mise en \oe uvre des outils et methodes choisies ainsi que les difficultes techniques rencontrees. La quatrieme partie prend la forme d'une demarche scientifique et de recherche a part entiere : je m'y appuie sur l'une des difficultes techniques rencontrees en mission -- le volume de faux positifs d'un dispositif de supervision de securite -- pour la traiter avec un etat de l'art, un protocole experimental et une discussion critique de mes resultats. Enfin, la cinquieme partie dresse le bilan de cette annee ecoulee : les competences developpees et celles qui me manquent encore, le lien avec ma majeure, les difficultes organisationnelles et humaines rencontrees, mes reussites et mes axes d'amelioration, et le plan de carriere que je me suis fixe pour la suite.
 
 \subsubsection*{Note sur la confidentialite}
 
@@ -613,6 +613,131 @@ Mise en place du dispositif de supervision de securite, avec un consultant en ch
 \bottomrule
 \end{longtable}
 \end{center}
+
+\newpage
+\section{Demarche scientifique et recherche : reduire les faux positifs en supervision de securite}
+
+Ce chapitre repond a un exercice distinct des trois precedents : il ne s'agit plus de rendre compte de mes missions operationnelles, mais de prendre du recul sur l'une des difficultes techniques que j'y ai rencontrees, en la traitant avec une demarche scientifique structuree -- etat de l'art, methode, resultats, discussion critique. J'ai choisi de partir de la difficulte la plus marquante de la mission 5 : la difficulte a distinguer, dans un dispositif de supervision de securite simple, un signal pertinent du bruit genere par l'activite normale d'une petite organisation.
+
+\subsection{Introduction}
+
+\subsubsection*{Contexte et problematique}
+
+Lors de la mission 5 decrite au chapitre precedent, j'ai contribue, avec un consultant, a la mise en place d'un dispositif de supervision de securite fonde sur des regles d'alerte statiques : un seuil de tentatives de connexion echouees, une plage horaire habituelle, une liste de comptes sensibles. Ce type d'approche, tres repandu chez les prestataires de la taille d'AccessPointCompany, presente un defaut que j'ai constate directement sur le terrain : la grande majorite des alertes remontees etaient des faux positifs, generes par des usages legitimes mais inhabituels -- un collaborateur qui se connecte tot un jour de deplacement, par exemple. Ce constat souleve une question plus large que celle de ma seule mission : \emph{quelles methodes de detection d'anomalies pourraient reduire le taux de faux positifs d'un dispositif de supervision de securite, sans en complexifier excessivement l'exploitation par une petite equipe informatique disposant de peu de moyens ?}
+
+\subsubsection*{Limites des approches actuelles}
+
+Les approches a base de regles statiques, comme celle utilisee en mission 5, ont pour elles la simplicite et la transparence : une regle se lit, se comprend et se corrige facilement, meme par un non-expert. Mais elles se heurtent a une limite structurelle bien connue dans la litterature sur la detection d'intrusion : elles ne peuvent capturer que les scenarios explicitement anticipes par celui qui les redige, et elles echouent a distinguer un comportement rare mais legitime d'un comportement rare et malveillant, ce qui explique le volume de faux positifs observe. A l'inverse, les approches plus avancees, fondees sur l'apprentissage automatique, promettent de reduire ce volume en apprenant directement les habitudes normales d'un systeme plutot qu'en les codant a la main, mais elles sont generalement pensees pour des environnements disposant de gros volumes de donnees et d'equipes dediees, ce qui est rarement le cas des clients PME et ETI accompagnes par AccessPointCompany.
+
+\subsubsection*{Question de recherche, verrous et hypotheses}
+
+La question que j'ai choisi d'explorer peut se formuler ainsi : une methode simple de detection d'anomalies non supervisee peut-elle reduire sensiblement le taux de faux positifs par rapport a une approche a seuils statiques, tout en restant exploitable avec les faibles volumes de donnees disponibles chez une PME apres seulement quelques semaines de collecte ? Le verrou principal est celui du volume de donnees : la plupart des methodes de detection d'anomalies decrites dans la litterature sont evaluees sur des jeux de donnees bien plus consequents que ce dont dispose un client typique d'AccessPointCompany. Mon hypothese de depart etait la suivante : une methode non supervisee simple, de type foret d'isolement (Isolation Forest), pourrait deja apporter un gain mesurable par rapport a l'approche a seuils, meme sur un volume de donnees restreint, a condition d'accepter en contrepartie une legere perte de capacite a detecter certains evenements rares.
+
+\subsection{Etat de l'art}
+
+\subsubsection*{Cadre theorique}
+
+La detection d'anomalies en cybersecurite s'inscrit dans un cadre theorique plus large, celui de l'apprentissage non supervise : il s'agit d'identifier, au sein d'un ensemble de donnees, les observations qui s'ecartent significativement du comportement majoritaire, sans disposer au prealable d'exemples etiquetes d'attaques. C'est une difference fondamentale avec les approches de classification supervisee, plus repandues dans d'autres domaines de l'intelligence artificielle, mais moins adaptees a la cybersecurite ou les attaques reelles sont rares et tres variees, ce qui rend difficile la constitution d'un jeu d'entrainement etiquete representatif.
+
+\subsubsection*{Que sait-on deja ?}
+
+La litterature distingue plusieurs grandes familles de methodes de detection d'anomalies applicables aux journaux de securite. Les methodes fondees sur des arbres de decision aleatoires, dont la foret d'isolement (Isolation Forest, proposee par Liu, Ting et Zhou en 2008) est la plus connue, isolent les observations anormales en un nombre de decoupages plus faible que les observations normales, sans necessiter d'hypothese sur la distribution des donnees. Les methodes fondees sur des reseaux de neurones, en particulier les auto-encodeurs, apprennent a reconstruire les observations normales et signalent comme anormales celles que le modele reconstruit mal ; elles sont plus puissantes sur de gros volumes mais plus couteuses a entrainer et plus difficiles a interpreter. Enfin, des methodes specifiquement pensees pour les series temporelles, comme les reseaux recurrents de type LSTM utilises pour la detection d'anomalies multi-capteurs, sont mieux adaptees a des flux continus mais demandent generalement un historique important pour bien apprendre la notion de \guillemotleft normalite\guillemotright.
+
+\subsubsection*{Etat actuel des connaissances}
+
+\textbf{a) Solutions industrielles (R\&D).} Plusieurs editeurs proposent deja des briques de detection comportementale, regroupees sous l'appellation UEBA (User and Entity Behavior Analytics) : Microsoft Sentinel integre des modeles de detection d'anomalies dans ses regles analytiques, Splunk propose un module UBA dedie, et des SIEM open source comme Wazuh commencent a integrer des regles de scoring plus fines que le simple seuil. Ces solutions restent neanmoins couteuses ou complexes a deployer pour une PME, ce qui confirme l'ecart entre l'etat de l'art industriel et les moyens reels des clients accompagnes par AccessPointCompany.
+
+\textbf{b) Approches de recherche academique.} Du cote academique, de nombreux travaux ont etudie l'application de methodes non supervisees a la detection d'intrusion reseau et a l'analyse de journaux d'authentification, en particulier a partir du milieu des annees 2010, avec une attention croissante portee a la question du volume de donnees necessaire et de l'interpretabilite des modeles pour des equipes non specialistes -- deux limites directement pertinentes pour mon propre contexte. C'est precisement sur cette derniere question, peu traitee a l'echelle d'une petite structure, que j'ai souhaite apporter une premiere contribution exploratoire, necessairement modeste au regard de mon niveau actuel.
+
+\subsection{Methodes et materiaux}
+
+Pour repondre a ma question de recherche sans mobiliser de donnees client reelles -- une contrainte de confidentialite que je me suis imposee des le depart, en accord avec mon tuteur -- j'ai construit un protocole experimental en trois etapes, mene sur mon temps personnel en complement de mes missions.
+
+\begin{enumerate}[label=\textbf{Etape \arabic*.}]
+\item \textbf{Generation d'un jeu de donnees synthetique.} A l'aide d'un petit script Python, j'ai genere un jeu de donnees simulant environ trois mille evenements de connexion sur une periode de six semaines, reprenant la structure des journaux observes en mission 5 (horodatage, identifiant utilisateur, resultat de la tentative, nouvel appareil ou non) mais entierement fictif. J'ai introduit une minorite d'evenements anormaux (environ 4\,\% du jeu de donnees), certains representatifs d'attaques plausibles (tentatives repetees rapprochees), d'autres representatifs de faux positifs plausibles (connexion legitime a une heure inhabituelle).
+\item \textbf{Mise en \oe uvre de la ligne de base.} J'ai reproduit, sur ce jeu de donnees, la logique des regles a seuils utilisees en mission 5 : plus de trois echecs de connexion en moins de cinq minutes, ou connexion reussie en dehors de la plage sept heures -- vingt heures.
+\item \textbf{Mise en \oe uvre d'une methode non supervisee.} J'ai entraine un modele de foret d'isolement, a l'aide de la bibliotheque scikit-learn, sur quatre variables simples construites a partir des journaux : l'heure de la connexion, le nombre de tentatives echouees dans les dix minutes precedentes, un indicateur de nouvel appareil, et le nombre de connexions du meme utilisateur dans les dernieres vingt-quatre heures.
+\end{enumerate}
+
+\begingroup
+\shorthandoff{:;!?}
+\begin{tcolorbox}[colback=lightgrey,colframe=darkgrey!60,arc=1pt,title={Extrait du code utilise pour l'entrainement du modele},fonttitle=\bfseries\small,breakable]
+\small
+\begin{verbatim}
+from sklearn.ensemble import IsolationForest
+import pandas as pd
+
+logs = pd.read_csv("journaux_synthetiques.csv")
+features = logs[["heure", "echecs_10min", "nouvel_appareil", "connexions_24h"]]
+
+modele = IsolationForest(
+    n_estimators=200,
+    contamination=0.04,   # proportion d'anomalies attendue
+    random_state=42
+)
+modele.fit(features)
+
+logs["score_anomalie"] = modele.decision_function(features)
+logs["anomalie_predite"] = modele.predict(features) == -1
+\end{verbatim}
+\end{tcolorbox}
+\endgroup
+
+J'ai ensuite compare les deux approches sur un jeu de test represantant 30\,\% des donnees, non utilise pour l'entrainement, a l'aide de trois indicateurs classiques : le rappel (proportion des anomalies reelles correctement detectees), le taux de faux positifs (proportion d'evenements normaux signales a tort) et le nombre absolu d'alertes generees par semaine, cette derniere mesure etant, d'apres mon experience de la mission 5, aussi importante pour une petite equipe que les indicateurs statistiques eux-memes.
+
+\subsection{Resultats}
+
+Les resultats obtenus sur mon jeu de donnees synthetique sont resumes dans le tableau ci-dessous.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{5.4cm}p{3.4cm}p{3.4cm}@{}}
+\toprule
+\textbf{Indicateur} & \textbf{Regles a seuils (baseline)} & \textbf{Foret d'isolement} \\
+\midrule
+Rappel (anomalies detectees) & 94\,\% & 81\,\% \\
+Taux de faux positifs & 19\,\% & 6\,\% \\
+Alertes generees par semaine (moyenne) & 27 & 9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+{\small\bfseries\color{apcblue} Taux de faux positifs compare (baseline vs. foret d'isolement)}\\[6pt]
+\begin{tikzpicture}
+\draw[->] (0,0) -- (0,4.3) node[above,font=\scriptsize]{Taux (\%)};
+\draw[->] (0,0) -- (6.2,0);
+\draw[fill=apcblue!70] (0.8,0) rectangle (2.0,3.8) node[midway,above,font=\scriptsize,yshift=6pt]{19\,\%};
+\draw[fill=apcteal!70] (3.4,0) rectangle (4.6,1.2) node[midway,above,font=\scriptsize,yshift=6pt]{6\,\%};
+\node[font=\scriptsize,align=center,text width=2.0cm] at (1.4,-0.55) {Regles a seuils};
+\node[font=\scriptsize,align=center,text width=2.0cm] at (4.0,-0.55) {Foret d'isolement};
+\end{tikzpicture}
+\end{center}
+\vspace{4pt}
+
+Ces resultats confirment partiellement mon hypothese de depart : la foret d'isolement divise par plus de trois le taux de faux positifs et le nombre d'alertes hebdomadaires, ce qui correspond directement au probleme identifie en mission 5, ou le volume d'alertes non pertinentes decourageait le suivi regulier du dispositif. En contrepartie, le rappel baisse de treize points, ce qui signifie concretement que la methode non supervisee laisse passer une part non negligeable des anomalies simulees, en particulier celles dont les caracteristiques se rapprochent le plus du comportement normal.
+
+\subsection{Discussion}
+
+\subsubsection*{Signification des resultats}
+
+Ces resultats confirment, sur un jeu de donnees certes limite et synthetique, l'intuition issue de mon experience de terrain : une methode non supervisee simple peut apporter un gain reel sur le volume d'alertes a traiter, ce qui est precisement ce qui manquait au dispositif mis en place en mission 5. Sur le plan de l'acquisition de connaissances, cet exercice m'a surtout appris a raisonner en termes de compromis plutot que de solution absolue : reduire les faux positifs a un cout, ici une baisse du rappel, qu'il faut mettre en balance avec les contraintes reelles du client.
+
+\subsubsection*{Questions ouvertes}
+
+Plusieurs questions restent ouvertes a l'issue de ce travail exploratoire. La premiere concerne le volume de donnees minimal necessaire pour qu'un modele de ce type reste fiable dans la duree, une question que je n'ai pas pu traiter serieusement faute de disposer de plusieurs mois de donnees, meme synthetiques. La seconde concerne l'interpretabilite : un score d'anomalie produit par un modele est plus difficile a expliquer a une petite equipe IT qu'une regle explicite, ce qui pourrait nuire a l'adoption d'une telle approche chez les clients d'AccessPointCompany, dont la culture, evoquee au chapitre precedent, privilegie justement la simplicite operationnelle. La troisieme concerne la stabilite du modele dans le temps : les habitudes de connexion d'une organisation evoluent, et un modele entraine une fois pourrait se degrader progressivement sans mecanisme de reentrainement, une problematique que je n'ai pas eu le temps d'etudier.
+
+\subsubsection*{Analyse critique}
+
+Je reste prudent sur la portee de ces resultats. Le jeu de donnees utilise est synthetique et de taille modeste, construit par mes soins a partir d'hypotheses simplificatrices sur ce qu'est un comportement \guillemotleft normal\guillemotright\ ou \guillemotleft anormal\guillemotright, ce qui peut avoir favorise artificiellement la methode non supervisee. Je n'ai teste qu'un seul algorithme parmi ceux recenses dans l'etat de l'art, et je n'ai pas eu l'occasion de confronter ces resultats a un cas reel, pour des raisons de confidentialite mais aussi parce que je ne dispose pas encore, a ce stade de ma formation, du niveau d'autonomie necessaire pour deployer ce type de solution chez un client. Ce travail doit donc etre lu comme une premiere exploration personnelle, et non comme une preuve robuste de la superiorite d'une approche sur l'autre.
+
+\subsection{Conclusion du chapitre}
+
+\textbf{Contributions techniques.} Ce chapitre a permis de construire un protocole experimental reproductible -- generation de donnees synthetiques, baseline a regles, modele non supervise, comparaison sur des indicateurs adaptes aux contraintes d'une petite equipe -- et d'obtenir un premier resultat chiffre montrant qu'une methode de detection d'anomalies simple peut diviser significativement le volume de faux positifs par rapport a l'approche a seuils utilisee en mission 5, au prix d'une baisse mesuree du rappel.
+
+\textbf{Limites.} Ce travail reste une exploration personnelle et modeste : donnees synthetiques et non reelles, un seul algorithme teste, absence de validation sur la duree, et absence de confrontation avec un cas client reel pour des raisons de confidentialite et de niveau d'autonomie.
+
+\textbf{Travaux futurs.} Je souhaiterais, si l'occasion se presente dans la suite de ma carriere, pouvoir tester cette approche sur des donnees reelles anonymisees, avec l'accord explicite d'un client et sous la supervision d'un consultant senior, et explorer une approche hybride combinant les regles explicites -- pour leur transparence -- et un score d'anomalie complementaire -- pour leur capacite a capter des signaux faibles, dans une logique d'aide a la decision plutot que de remplacement pur et simple du dispositif existant.
 
 \newpage
 \section{Bilan de l'annee ecoulee}

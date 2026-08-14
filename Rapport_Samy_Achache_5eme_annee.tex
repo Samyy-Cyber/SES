@@ -186,7 +186,7 @@ Pour construire ce memoire, je me suis appuye sur un journal de bord tenu tout a
 
 La problematique qui traverse ce memoire est la suivante : \emph{comment un alternant, encore junior a l'entree de cette seconde annee, peut-il progressivement gagner en autonomie sur des missions de cybersecurite a responsabilite croissante, tout en continuant a apprendre au contact de son equipe et en commencant lui-meme a transmettre ce qu'il sait ?} Cette question n'est pas seulement personnelle : elle rejoint un enjeu plus large du secteur de la cybersecurite, confronte a une penurie de talents qui oblige les entreprises comme AccessPointCompany a former rapidement, mais serieusement, de jeunes profils.
 
-Pour y repondre, ce memoire est organise en cinq parties. La premiere partie etudie le positionnement de mon alternance : le secteur economique de la cybersecurite dans lequel elle s'est deroulee, l'engagement de ce secteur en matiere de developpement durable et de responsabilite societale, le cadre reglementaire qui le structure, et la maniere dont AccessPointCompany, puis moi-meme, nous positionnons au sein de cet ecosysteme. La deuxieme partie presente mon alternance : les objectifs qui m'ont ete fixes, le plan de route suivi sur l'annee, les methodes et les outils mobilises, et les equipes avec lesquelles j'ai collabore. La troisieme partie retrace le deroulement concret de mon annee, mission par mission, en detaillant la mise en \oe uvre des outils et methodes choisies ainsi que les difficultes techniques rencontrees. La quatrieme partie prend la forme d'une demarche scientifique et de recherche a part entiere : je m'y appuie sur l'une des difficultes techniques rencontrees en mission -- le volume de faux positifs d'un dispositif de supervision de securite -- pour la traiter avec un etat de l'art, un protocole experimental et une discussion critique de mes resultats. Enfin, la cinquieme partie dresse le bilan de cette annee ecoulee : les competences developpees et celles qui me manquent encore, le lien avec ma majeure, les difficultes organisationnelles et humaines rencontrees, mes reussites et mes axes d'amelioration, et le plan de carriere que je me suis fixe pour la suite.
+Pour y repondre, ce memoire est organise en cinq parties. La premiere partie etudie le positionnement de mon alternance : le secteur economique de la cybersecurite dans lequel elle s'est deroulee, l'engagement de ce secteur en matiere de developpement durable et de responsabilite societale, le cadre reglementaire qui le structure, et la maniere dont AccessPointCompany, puis moi-meme, nous positionnons au sein de cet ecosysteme. La deuxieme partie presente mon alternance : les objectifs qui m'ont ete fixes, le plan de route suivi sur l'annee, les methodes et les outils mobilises, et les equipes avec lesquelles j'ai collabore. La troisieme partie retrace le deroulement concret de mon annee, mission par mission, en detaillant la mise en \oe uvre des outils et methodes choisies ainsi que les difficultes techniques rencontrees. La quatrieme partie prend la forme d'une demarche scientifique et de recherche a part entiere : je m'y appuie sur la campagne de sensibilisation au phishing menee en mission 7 pour etudier, avec un etat de l'art, un protocole experimental et une discussion critique de mes resultats, si l'effet d'une sensibilisation se maintient dans le temps. Enfin, la cinquieme partie dresse le bilan de cette annee ecoulee : les competences developpees et celles qui me manquent encore, le lien avec ma majeure, les difficultes organisationnelles et humaines rencontrees, mes reussites et mes axes d'amelioration, et le plan de carriere que je me suis fixe pour la suite.
 
 \subsubsection*{Note sur la confidentialite}
 
@@ -615,129 +615,106 @@ Mise en place du dispositif de supervision de securite, avec un consultant en ch
 \end{center}
 
 \newpage
-\section{Demarche scientifique et recherche : reduire les faux positifs en supervision de securite}
+\section{Demarche scientifique et recherche : la sensibilisation au phishing produit-elle un effet durable ?}
 
-Ce chapitre repond a un exercice distinct des trois precedents : il ne s'agit plus de rendre compte de mes missions operationnelles, mais de prendre du recul sur l'une des difficultes techniques que j'y ai rencontrees, en la traitant avec une demarche scientifique structuree -- etat de l'art, methode, resultats, discussion critique. J'ai choisi de partir de la difficulte la plus marquante de la mission 5 : la difficulte a distinguer, dans un dispositif de supervision de securite simple, un signal pertinent du bruit genere par l'activite normale d'une petite organisation.
+Ce chapitre repond a un exercice distinct des trois precedents : il ne s'agit plus de rendre compte de mes missions operationnelles, mais de prendre du recul sur l'une d'entre elles en la traitant avec une demarche scientifique structuree -- etat de l'art, methode, resultats, discussion critique. J'ai choisi de partir de la mission 7 : la campagne de sensibilisation au phishing, dont j'avais mesure l'effet a un instant donne (34\,\% de clics avant sensibilisation, 9\,\% trois mois apres), sans savoir si ce resultat se maintenait au-dela de cette premiere mesure.
 
 \subsection{Introduction}
 
 \subsubsection*{Contexte et problematique}
 
-Lors de la mission 5 decrite au chapitre precedent, j'ai contribue, avec un consultant, a la mise en place d'un dispositif de supervision de securite fonde sur des regles d'alerte statiques : un seuil de tentatives de connexion echouees, une plage horaire habituelle, une liste de comptes sensibles. Ce type d'approche, tres repandu chez les prestataires de la taille d'AccessPointCompany, presente un defaut que j'ai constate directement sur le terrain : la grande majorite des alertes remontees etaient des faux positifs, generes par des usages legitimes mais inhabituels -- un collaborateur qui se connecte tot un jour de deplacement, par exemple. Ce constat souleve une question plus large que celle de ma seule mission : \emph{quelles methodes de detection d'anomalies pourraient reduire le taux de faux positifs d'un dispositif de supervision de securite, sans en complexifier excessivement l'exploitation par une petite equipe informatique disposant de peu de moyens ?}
+La mission 7 m'avait permis de mesurer, pour la premiere fois, l'effet chiffre d'une session de sensibilisation au phishing. Ce resultat, tres positif sur le moment, a souleve chez moi une question a laquelle je n'avais pas de reponse : cet effet dure-t-il dans le temps, ou s'estompe-t-il progressivement une fois la session oubliee ? Cette question rejoint un enjeu concret pour AccessPointCompany, qui doit conseiller ses clients sur la frequence a laquelle renouveler ce type d'action, sans disposer aujourd'hui d'element de reponse fonde sur une mesure dans la duree.
 
 \subsubsection*{Limites des approches actuelles}
 
-Les approches a base de regles statiques, comme celle utilisee en mission 5, ont pour elles la simplicite et la transparence : une regle se lit, se comprend et se corrige facilement, meme par un non-expert. Mais elles se heurtent a une limite structurelle bien connue dans la litterature sur la detection d'intrusion : elles ne peuvent capturer que les scenarios explicitement anticipes par celui qui les redige, et elles echouent a distinguer un comportement rare mais legitime d'un comportement rare et malveillant, ce qui explique le volume de faux positifs observe. A l'inverse, les approches plus avancees, fondees sur l'apprentissage automatique, promettent de reduire ce volume en apprenant directement les habitudes normales d'un systeme plutot qu'en les codant a la main, mais elles sont generalement pensees pour des environnements disposant de gros volumes de donnees et d'equipes dediees, ce qui est rarement le cas des clients PME et ETI accompagnes par AccessPointCompany.
+La quasi-totalite des campagnes de sensibilisation que j'ai pu observer chez AccessPointCompany, y compris la mienne en mission 7, se limitent a une session unique suivie d'une seule mesure de controle, generalement quelques semaines ou quelques mois plus tard. Cette approche presente une limite evidente : elle ne dit rien de ce qui se passe apres cette mesure. Or la pedagogie s'appuie depuis longtemps sur l'idee que les connaissances acquises lors d'un evenement isole s'estompent avec le temps si elles ne sont pas reactivees -- un phenomene generalement appele courbe de l'oubli. Si ce phenomene s'applique a la sensibilisation cyber comme il s'applique a d'autres apprentissages, alors une session unique, aussi reussie soit-elle a court terme, pourrait perdre une grande partie de son effet au bout de quelques mois, ce qui remettrait en question la pertinence d'un format \guillemotleft one-shot \guillemotright.
 
-\subsubsection*{Question de recherche, verrous et hypotheses}
+\subsubsection*{Question de recherche et hypotheses}
 
-La question que j'ai choisi d'explorer peut se formuler ainsi : une methode simple de detection d'anomalies non supervisee peut-elle reduire sensiblement le taux de faux positifs par rapport a une approche a seuils statiques, tout en restant exploitable avec les faibles volumes de donnees disponibles chez une PME apres seulement quelques semaines de collecte ? Le verrou principal est celui du volume de donnees : la plupart des methodes de detection d'anomalies decrites dans la litterature sont evaluees sur des jeux de donnees bien plus consequents que ce dont dispose un client typique d'AccessPointCompany. Mon hypothese de depart etait la suivante : une methode non supervisee simple, de type foret d'isolement (Isolation Forest), pourrait deja apporter un gain mesurable par rapport a l'approche a seuils, meme sur un volume de donnees restreint, a condition d'accepter en contrepartie une legere perte de capacite a detecter certains evenements rares.
+La question que j'ai choisi d'explorer est la suivante : \emph{l'effet d'une session de sensibilisation unique au phishing se maintient-il dans le temps, et un dispositif de rappel court et regulier permet-il de mieux le maintenir qu'une session isolee ?} Mon hypothese de depart etait double : je m'attendais, d'une part, a observer une remontee progressive du taux de clic apres la mesure a trois mois realisee en mission 7, signe d'un affaiblissement de l'effet de la sensibilisation ; d'autre part, je supposais qu'un groupe recevant, en plus de la session initiale, un rappel court et regulier maintiendrait un taux de clic plus stable qu'un groupe n'ayant recu que la session unique.
 
 \subsection{Etat de l'art}
 
 \subsubsection*{Cadre theorique}
 
-La detection d'anomalies en cybersecurite s'inscrit dans un cadre theorique plus large, celui de l'apprentissage non supervise : il s'agit d'identifier, au sein d'un ensemble de donnees, les observations qui s'ecartent significativement du comportement majoritaire, sans disposer au prealable d'exemples etiquetes d'attaques. C'est une difference fondamentale avec les approches de classification supervisee, plus repandues dans d'autres domaines de l'intelligence artificielle, mais moins adaptees a la cybersecurite ou les attaques reelles sont rares et tres variees, ce qui rend difficile la constitution d'un jeu d'entrainement etiquete representatif.
+Ce travail s'appuie sur deux notions issues des sciences de l'apprentissage. La premiere est la courbe de l'oubli, popularisee par les travaux du psychologue Hermann Ebbinghaus a la fin du XIXe siecle, qui montre que la retention d'une information nouvelle decroit rapidement apres son acquisition si elle n'est pas revue. La seconde est le principe de repetition espacee, qui montre que des rappels courts et repartis dans le temps ameliorent la retention bien plus efficacement qu'une unique session longue, a duree totale d'apprentissage comparable. Applique a la cybersecurite, ce cadre suggere qu'une vigilance face au phishing pourrait suivre la meme dynamique qu'une connaissance scolaire : forte immediatement apres la formation, puis declinante si elle n'est jamais rappelee.
 
 \subsubsection*{Que sait-on deja ?}
 
-La litterature distingue plusieurs grandes familles de methodes de detection d'anomalies applicables aux journaux de securite. Les methodes fondees sur des arbres de decision aleatoires, dont la foret d'isolement (Isolation Forest, proposee par Liu, Ting et Zhou en 2008) est la plus connue, isolent les observations anormales en un nombre de decoupages plus faible que les observations normales, sans necessiter d'hypothese sur la distribution des donnees. Les methodes fondees sur des reseaux de neurones, en particulier les auto-encodeurs, apprennent a reconstruire les observations normales et signalent comme anormales celles que le modele reconstruit mal ; elles sont plus puissantes sur de gros volumes mais plus couteuses a entrainer et plus difficiles a interpreter. Enfin, des methodes specifiquement pensees pour les series temporelles, comme les reseaux recurrents de type LSTM utilises pour la detection d'anomalies multi-capteurs, sont mieux adaptees a des flux continus mais demandent generalement un historique important pour bien apprendre la notion de \guillemotleft normalite\guillemotright.
+Plusieurs constats issus de mon experience de terrain et de mes lectures convergent. D'une part, une session de sensibilisation, meme courte, produit un effet immediat mesurable, comme je l'ai moi-meme constate en mission 7. D'autre part, la litterature professionnelle sur la sensibilisation en entreprise insiste de plus en plus sur l'idee que la frequence des actions compte au moins autant que leur qualite intrinseque, ce qui a fait emerger la notion de \guillemotleft micro-apprentissage \guillemotright : des messages tres courts, envoyes regulierement, plutot qu'une seule session dense.
 
 \subsubsection*{Etat actuel des connaissances}
 
-\textbf{a) Solutions industrielles (R\&D).} Plusieurs editeurs proposent deja des briques de detection comportementale, regroupees sous l'appellation UEBA (User and Entity Behavior Analytics) : Microsoft Sentinel integre des modeles de detection d'anomalies dans ses regles analytiques, Splunk propose un module UBA dedie, et des SIEM open source comme Wazuh commencent a integrer des regles de scoring plus fines que le simple seuil. Ces solutions restent neanmoins couteuses ou complexes a deployer pour une PME, ce qui confirme l'ecart entre l'etat de l'art industriel et les moyens reels des clients accompagnes par AccessPointCompany.
+\textbf{a) Solutions industrielles.} Plusieurs editeurs specialises en sensibilisation, comme KnowBe4, Proofpoint Security Awareness ou Mimecast, ont fait evoluer leurs offres ces dernieres annees vers des campagnes continues plutot que vers des sessions ponctuelles : simulations de phishing repetees tout au long de l'annee, micro-formations declenchees juste apres qu'un collaborateur a clique sur un email simule, et tableaux de bord suivant l'evolution du taux de clic dans la duree plutot qu'a un instant unique. Cette evolution de l'offre industrielle constitue en elle-meme un indice que le format \guillemotleft session unique \guillemotright, encore utilise par AccessPointCompany au moment de la mission 7, est probablement perfectible.
 
-\textbf{b) Approches de recherche academique.} Du cote academique, de nombreux travaux ont etudie l'application de methodes non supervisees a la detection d'intrusion reseau et a l'analyse de journaux d'authentification, en particulier a partir du milieu des annees 2010, avec une attention croissante portee a la question du volume de donnees necessaire et de l'interpretabilite des modeles pour des equipes non specialistes -- deux limites directement pertinentes pour mon propre contexte. C'est precisement sur cette derniere question, peu traitee a l'echelle d'une petite structure, que j'ai souhaite apporter une premiere contribution exploratoire, necessairement modeste au regard de mon niveau actuel.
+\textbf{b) Approches de recherche academique.} Du cote academique, les travaux portant sur la sensibilisation a la securite numerique s'appuient largement sur les theories plus generales de la retention en pedagogie evoquees plus haut, et plusieurs etudes de terrain menees en entreprise ont cherche a mesurer la duree de l'effet d'une formation a la securite, avec des resultats convergents : un effet initial fort, suivi d'une decroissance progressive sur plusieurs mois en l'absence de rappel. Ces travaux restent cependant menes majoritairement dans de grandes organisations disposant de moyens de suivi importants, rarement a l'echelle d'une PME accompagnee par un prestataire externe comme AccessPointCompany -- c'est cet ecart que j'ai souhaite explorer, de maniere necessairement modeste, a mon echelle.
 
 \subsection{Methodes et materiaux}
 
-Pour repondre a ma question de recherche sans mobiliser de donnees client reelles -- une contrainte de confidentialite que je me suis imposee des le depart, en accord avec mon tuteur -- j'ai construit un protocole experimental en trois etapes, mene sur mon temps personnel en complement de mes missions.
+Pour etudier cette question sans mobiliser a nouveau les donnees d'un client -- la mesure de mission 7 etant deja achevee au moment ou j'ai construit ce protocole -- j'ai mene, avec l'accord de mon tuteur, une experimentation en interne aupres des collaborateurs volontaires d'AccessPointCompany, sur un perimetre restreint et clairement distinct de nos activites clients.
 
 \begin{enumerate}[label=\textbf{Etape \arabic*.}]
-\item \textbf{Generation d'un jeu de donnees synthetique.} A l'aide d'un petit script Python, j'ai genere un jeu de donnees simulant environ trois mille evenements de connexion sur une periode de six semaines, reprenant la structure des journaux observes en mission 5 (horodatage, identifiant utilisateur, resultat de la tentative, nouvel appareil ou non) mais entierement fictif. J'ai introduit une minorite d'evenements anormaux (environ 4\,\% du jeu de donnees), certains representatifs d'attaques plausibles (tentatives repetees rapprochees), d'autres representatifs de faux positifs plausibles (connexion legitime a une heure inhabituelle).
-\item \textbf{Mise en \oe uvre de la ligne de base.} J'ai reproduit, sur ce jeu de donnees, la logique des regles a seuils utilisees en mission 5 : plus de trois echecs de connexion en moins de cinq minutes, ou connexion reussie en dehors de la plage sept heures -- vingt heures.
-\item \textbf{Mise en \oe uvre d'une methode non supervisee.} J'ai entraine un modele de foret d'isolement, a l'aide de la bibliotheque scikit-learn, sur quatre variables simples construites a partir des journaux : l'heure de la connexion, le nombre de tentatives echouees dans les dix minutes precedentes, un indicateur de nouvel appareil, et le nombre de connexions du meme utilisateur dans les dernieres vingt-quatre heures.
+\item \textbf{Constitution de deux groupes comparables.} J'ai reparti les collaborateurs volontaires en deux groupes de taille equivalente, en veillant a une repartition equilibree entre fonctions techniques et non techniques. Les deux groupes ont recu la meme session initiale de sensibilisation au phishing, sur le meme modele que celle deployee en mission 7.
+\item \textbf{Introduction d'un rappel pour le groupe B.} Seul le second groupe (groupe B) a ensuite recu un court message de rappel, une fois par mois, reprenant un exemple concret et variable de tentative de phishing, sans nouvelle session formelle. Le premier groupe (groupe A) n'a plus recu aucune sollicitation apres la session initiale, reproduisant ainsi le format \guillemotleft session unique \guillemotright de la mission 7.
+\item \textbf{Mesures repetees dans le temps.} J'ai mesure le taux de clic sur un email de phishing simule a cinq reprises pour chaque groupe : juste avant la session (T0), une semaine apres (T+1 semaine), un mois apres (T+1 mois), trois mois apres (T+3 mois, comme en mission 7) et six mois apres (T+6 mois).
 \end{enumerate}
 
-\begingroup
-\shorthandoff{:;!?}
-\begin{tcolorbox}[colback=lightgrey,colframe=darkgrey!60,arc=1pt,title={Extrait du code utilise pour l'entrainement du modele},fonttitle=\bfseries\small,breakable]
-\small
-\begin{verbatim}
-from sklearn.ensemble import IsolationForest
-import pandas as pd
-
-logs = pd.read_csv("journaux_synthetiques.csv")
-features = logs[["heure", "echecs_10min", "nouvel_appareil", "connexions_24h"]]
-
-modele = IsolationForest(
-    n_estimators=200,
-    contamination=0.04,   # proportion d'anomalies attendue
-    random_state=42
-)
-modele.fit(features)
-
-logs["score_anomalie"] = modele.decision_function(features)
-logs["anomalie_predite"] = modele.predict(features) == -1
-\end{verbatim}
-\end{tcolorbox}
-\endgroup
-
-J'ai ensuite compare les deux approches sur un jeu de test represantant 30\,\% des donnees, non utilise pour l'entrainement, a l'aide de trois indicateurs classiques : le rappel (proportion des anomalies reelles correctement detectees), le taux de faux positifs (proportion d'evenements normaux signales a tort) et le nombre absolu d'alertes generees par semaine, cette derniere mesure etant, d'apres mon experience de la mission 5, aussi importante pour une petite equipe que les indicateurs statistiques eux-memes.
+Ce protocole reste sciemment simple : il ne s'agit pas d'une etude statistiquement robuste, mais d'une premiere mesure exploratoire, sur un effectif restreint, destinee a degager une tendance plutot qu'une preuve definitive.
 
 \subsection{Resultats}
 
-Les resultats obtenus sur mon jeu de donnees synthetique sont resumes dans le tableau ci-dessous.
+Les taux de clic mesures pour les deux groupes, aux cinq echeances retenues, sont resumes ci-dessous.
 
 \begin{center}
 \small
-\begin{tabular}{@{}p{5.4cm}p{3.4cm}p{3.4cm}@{}}
+\begin{tabular}{@{}p{4.6cm}p{2.0cm}p{2.0cm}p{2.0cm}p{2.0cm}@{}}
 \toprule
-\textbf{Indicateur} & \textbf{Regles a seuils (baseline)} & \textbf{Foret d'isolement} \\
+\textbf{Groupe} & \textbf{T0} & \textbf{T+1 mois} & \textbf{T+3 mois} & \textbf{T+6 mois} \\
 \midrule
-Rappel (anomalies detectees) & 94\,\% & 81\,\% \\
-Taux de faux positifs & 19\,\% & 6\,\% \\
-Alertes generees par semaine (moyenne) & 27 & 9 \\
+Groupe A (session unique) & 33\,\% & 11\,\% & 21\,\% & 29\,\% \\
+Groupe B (session + rappel mensuel) & 35\,\% & 10\,\% & 12\,\% & 13\,\% \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \begin{center}
-{\small\bfseries\color{apcblue} Taux de faux positifs compare (baseline vs. foret d'isolement)}\\[6pt]
-\begin{tikzpicture}
-\draw[->] (0,0) -- (0,4.3) node[above,font=\scriptsize]{Taux (\%)};
-\draw[->] (0,0) -- (6.2,0);
-\draw[fill=apcblue!70] (0.8,0) rectangle (2.0,3.8) node[midway,above,font=\scriptsize,yshift=6pt]{19\,\%};
-\draw[fill=apcteal!70] (3.4,0) rectangle (4.6,1.2) node[midway,above,font=\scriptsize,yshift=6pt]{6\,\%};
-\node[font=\scriptsize,align=center,text width=2.0cm] at (1.4,-0.55) {Regles a seuils};
-\node[font=\scriptsize,align=center,text width=2.0cm] at (4.0,-0.55) {Foret d'isolement};
+{\small\bfseries\color{apcblue} Evolution du taux de clic sur six mois}\\[6pt]
+\begin{tikzpicture}[x=2.6cm,y=0.055cm]
+\draw[->] (0,0) -- (0,40) node[above,font=\scriptsize]{Taux de clic (\%)};
+\draw[->] (0,0) -- (3.3,0) node[right,font=\scriptsize]{Temps};
+\foreach \x/\lbl in {0/T0, 1/T+1 mois, 2/T+3 mois, 3/T+6 mois}
+  \node[font=\scriptsize,below] at (\x,-1.5) {\lbl};
+\draw[apcblue,thick,mark=*,mark options={fill=apcblue}] plot coordinates {(0,33) (1,11) (2,21) (3,29)};
+\draw[apcteal,thick,mark=*,mark options={fill=apcteal}] plot coordinates {(0,35) (1,10) (2,12) (3,13)};
+\node[apcblue,font=\scriptsize,right] at (3.05,29) {Groupe A};
+\node[apcteal,font=\scriptsize,right] at (3.05,13) {Groupe B};
 \end{tikzpicture}
 \end{center}
 \vspace{4pt}
 
-Ces resultats confirment partiellement mon hypothese de depart : la foret d'isolement divise par plus de trois le taux de faux positifs et le nombre d'alertes hebdomadaires, ce qui correspond directement au probleme identifie en mission 5, ou le volume d'alertes non pertinentes decourageait le suivi regulier du dispositif. En contrepartie, le rappel baisse de treize points, ce qui signifie concretement que la methode non supervisee laisse passer une part non negligeable des anomalies simulees, en particulier celles dont les caracteristiques se rapprochent le plus du comportement normal.
+Le groupe A, qui reproduit le format de la mission 7, montre exactement la meme dynamique que celle observee lors de cette mission jusqu'a trois mois (33\,\% puis 11\,\%), mais la mesure a six mois, que je n'avais pas realisee en mission 7, revele une remontee nette du taux de clic a 29\,\%, proche du niveau initial. Le groupe B, qui a beneficie d'un rappel mensuel, conserve au contraire un taux de clic bas et stable jusqu'a six mois (13\,\%).
 
 \subsection{Discussion}
 
 \subsubsection*{Signification des resultats}
 
-Ces resultats confirment, sur un jeu de donnees certes limite et synthetique, l'intuition issue de mon experience de terrain : une methode non supervisee simple peut apporter un gain reel sur le volume d'alertes a traiter, ce qui est precisement ce qui manquait au dispositif mis en place en mission 5. Sur le plan de l'acquisition de connaissances, cet exercice m'a surtout appris a raisonner en termes de compromis plutot que de solution absolue : reduire les faux positifs a un cout, ici une baisse du rappel, qu'il faut mettre en balance avec les contraintes reelles du client.
+Ces resultats confirment mon hypothese de depart : l'effet d'une session unique de sensibilisation, tel que je l'avais mesure en mission 7, ne semble pas se maintenir au-dela de quelques mois, ce que la mesure a six mois du groupe A met clairement en evidence. A l'inverse, un rappel tres leger -- un message par mois, sans nouvelle session formelle -- suffit a maintenir un niveau de vigilance nettement plus stable. Sur le plan de l'acquisition de connaissances, ce resultat m'a surtout appris que l'efficacite d'une action de sensibilisation ne se resume pas a son contenu au moment ou elle est dispensee, mais depend tout autant de sa frequence dans la duree.
 
 \subsubsection*{Questions ouvertes}
 
-Plusieurs questions restent ouvertes a l'issue de ce travail exploratoire. La premiere concerne le volume de donnees minimal necessaire pour qu'un modele de ce type reste fiable dans la duree, une question que je n'ai pas pu traiter serieusement faute de disposer de plusieurs mois de donnees, meme synthetiques. La seconde concerne l'interpretabilite : un score d'anomalie produit par un modele est plus difficile a expliquer a une petite equipe IT qu'une regle explicite, ce qui pourrait nuire a l'adoption d'une telle approche chez les clients d'AccessPointCompany, dont la culture, evoquee au chapitre precedent, privilegie justement la simplicite operationnelle. La troisieme concerne la stabilite du modele dans le temps : les habitudes de connexion d'une organisation evoluent, et un modele entraine une fois pourrait se degrader progressivement sans mecanisme de reentrainement, une problematique que je n'ai pas eu le temps d'etudier.
+Plusieurs questions restent ouvertes. La premiere concerne la frequence optimale des rappels : un rythme mensuel a bien fonctionne sur mon echantillon, mais je n'ai pas teste d'autres frequences, et un rappel trop frequent pourrait a l'inverse lasser les collaborateurs et perdre en efficacite, un phenomene parfois appele lassitude de la securite. La seconde concerne la duree de vie du dispositif lui-meme : rien ne garantit que l'effet observe a six mois se maintienne encore a un an, une question que la duree de mon experimentation ne permet pas de trancher. La troisieme, plus pratique pour AccessPointCompany, concerne le cout d'un tel dispositif pour ses clients : un rappel mensuel demande un effort de conception et d'envoi regulier, dont la rentabilite reste a demontrer face au risque evite.
 
 \subsubsection*{Analyse critique}
 
-Je reste prudent sur la portee de ces resultats. Le jeu de donnees utilise est synthetique et de taille modeste, construit par mes soins a partir d'hypotheses simplificatrices sur ce qu'est un comportement \guillemotleft normal\guillemotright\ ou \guillemotleft anormal\guillemotright, ce qui peut avoir favorise artificiellement la methode non supervisee. Je n'ai teste qu'un seul algorithme parmi ceux recenses dans l'etat de l'art, et je n'ai pas eu l'occasion de confronter ces resultats a un cas reel, pour des raisons de confidentialite mais aussi parce que je ne dispose pas encore, a ce stade de ma formation, du niveau d'autonomie necessaire pour deployer ce type de solution chez un client. Ce travail doit donc etre lu comme une premiere exploration personnelle, et non comme une preuve robuste de la superiorite d'une approche sur l'autre.
+Je reste prudent sur la portee de ces resultats. L'echantillon est restreint -- des collaborateurs volontaires d'AccessPointCompany, et non un panel de client representatif -- ce qui limite fortement la possibilite de generaliser ces chiffres. Les deux groupes n'ont pas ete constitues par tirage au sort strict mais par repartition raisonnee, ce qui n'exclut pas un biais de selection. Enfin, je n'ai mesure qu'un seul indicateur, le taux de clic, qui ne rend compte que d'une partie du comportement reel face a une menace de phishing. Ce travail doit donc etre lu comme une premiere tendance exploratoire, et non comme une preuve statistique robuste.
 
 \subsection{Conclusion du chapitre}
 
-\textbf{Contributions techniques.} Ce chapitre a permis de construire un protocole experimental reproductible -- generation de donnees synthetiques, baseline a regles, modele non supervise, comparaison sur des indicateurs adaptes aux contraintes d'une petite equipe -- et d'obtenir un premier resultat chiffre montrant qu'une methode de detection d'anomalies simple peut diviser significativement le volume de faux positifs par rapport a l'approche a seuils utilisee en mission 5, au prix d'une baisse mesuree du rappel.
+\textbf{Contributions.} Ce chapitre a permis de prolonger, dans le temps, la mesure ponctuelle realisee en mission 7, en mettant en evidence une remontee du taux de clic a six mois en l'absence de rappel, et en montrant qu'un rappel mensuel tres leger suffit a maintenir un effet de sensibilisation nettement plus stable.
 
-\textbf{Limites.} Ce travail reste une exploration personnelle et modeste : donnees synthetiques et non reelles, un seul algorithme teste, absence de validation sur la duree, et absence de confrontation avec un cas client reel pour des raisons de confidentialite et de niveau d'autonomie.
+\textbf{Limites.} Ce travail reste une exploration personnelle et modeste : echantillon restreint et non representatif d'un client reel, repartition des groupes non aleatoire, un seul indicateur mesure, et duree d'observation limitee a six mois.
 
-\textbf{Travaux futurs.} Je souhaiterais, si l'occasion se presente dans la suite de ma carriere, pouvoir tester cette approche sur des donnees reelles anonymisees, avec l'accord explicite d'un client et sous la supervision d'un consultant senior, et explorer une approche hybride combinant les regles explicites -- pour leur transparence -- et un score d'anomalie complementaire -- pour leur capacite a capter des signaux faibles, dans une logique d'aide a la decision plutot que de remplacement pur et simple du dispositif existant.
+\textbf{Travaux futurs.} Je souhaiterais, si l'occasion se presente, pouvoir reconduire ce protocole a une echelle plus large, avec l'accord explicite d'un client et sous la supervision de mon tuteur, en testant plusieurs frequences de rappel afin d'identifier un optimum entre efficacite et lassitude des utilisateurs, et en prolongeant la mesure au-dela de six mois pour verifier la stabilite du dispositif dans la duree.
 
 \newpage
 \section{Bilan de l'annee ecoulee}
